@@ -1,0 +1,9 @@
+C:\Users\edu\source\repos\Burgos\DAL\bin\Debug\DAL.dll
+C:\Users\edu\source\repos\Burgos\DAL\bin\Debug\DAL.pdb
+C:\Users\edu\source\repos\Burgos\DAL\bin\Debug\Entities.dll
+C:\Users\edu\source\repos\Burgos\DAL\bin\Debug\Entities.pdb
+C:\Users\edu\source\repos\Burgos\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+C:\Users\edu\source\repos\Burgos\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\edu\source\repos\Burgos\DAL\obj\Debug\DAL.csproj.Up2Date
+C:\Users\edu\source\repos\Burgos\DAL\obj\Debug\DAL.dll
+C:\Users\edu\source\repos\Burgos\DAL\obj\Debug\DAL.pdb

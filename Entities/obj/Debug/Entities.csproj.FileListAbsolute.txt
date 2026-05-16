@@ -1,0 +1,6 @@
+C:\Users\edu\source\repos\Burgos\Entities\bin\Debug\Entities.dll
+C:\Users\edu\source\repos\Burgos\Entities\bin\Debug\Entities.pdb
+C:\Users\edu\source\repos\Burgos\Entities\obj\Debug\Entities.csproj.AssemblyReference.cache
+C:\Users\edu\source\repos\Burgos\Entities\obj\Debug\Entities.csproj.CoreCompileInputs.cache
+C:\Users\edu\source\repos\Burgos\Entities\obj\Debug\Entities.dll
+C:\Users\edu\source\repos\Burgos\Entities\obj\Debug\Entities.pdb
