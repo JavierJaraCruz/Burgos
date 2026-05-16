@@ -1,0 +1,9 @@
+# Ignorar la carpeta de configuración de Visual Studio
+.vs/
+
+# Ignorar la carpeta de paquetes externos descargados
+packages/
+
+# Ignorar las carpetas de compilación que genera C# automáticamente
+bin/
+obj/
