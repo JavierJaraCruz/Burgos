@@ -45,5 +45,34 @@ namespace DAL
             return lista;
         }
 
+        public InventarioMovimiento ObtenerPorId(int id)
+        {
+            InventarioMovimiento inventarioMovimiento = null;
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                string query = "SELECT * FROM InventarioMovimiento WHERE MovimientoId = @id";
+                SqlCommand cmd = new SqlCommand (query, conn);
+
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    inventarioMovimiento = new InventarioMovimiento
+                    {
+                        MovimientoId = (int)reader["MovimientoId"],
+                        ProductoId = (int)reader["ProductoId"],
+                        TipoMovimiento = reader["TipoMovimiento"].ToString(),
+                        Cantidad = (int)reader["Cantidad"],
+                        FechaMovimiento = (DateTime)reader["FechaMovimiento"],
+                        Referencia = reader["Referencia"].ToString()
+                    };
+                }
+            }
+
+
+            return inventarioMovimiento;
+        }
+
     }
 }

@@ -42,6 +42,35 @@ namespace DAL
             return lista;
         }
 
+        public Orden ObtenerPorId(int id) 
+        {
+            Orden orden = null;
+
+            using(SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM Ordenes WHERE OrdenId = @id ";
+                SqlCommand cmd = new SqlCommand(@query, conn);
+
+                cmd.Parameters.AddWithValue("id", id);
+                conn.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    orden = new Orden
+                    {
+                        OrdenId = (int)reader["OrdenId"],
+                        UsuarioId = (int)reader["UsuarioId"],
+                        FechaOrden = (DateTime)reader["FechaOrden"],
+                        Total = (decimal)reader["Total"],
+                        Estado = reader["Estado"].ToString()
+                    };
+                }
+            }
+
+            return orden;
+        }
+
             
     }
 }
