@@ -41,5 +41,34 @@ namespace DAL
             return lista;
         }
 
+        public CompraProveedor ObtenerPorId(int id) 
+        {
+            CompraProveedor compraProveedor = null;
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                string query = "SELECT * FROM CompraProveedor WHERE CompraId = @id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                cmd.Parameters.AddWithValue("@id", id);
+
+                conn.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    compraProveedor = new CompraProveedor {
+                        CompraId = (int)reader["CompraId"],
+                        ProveedorId = (int)reader["ProveedorId"],
+                        FechaCompra = (DateTime)reader["FechaCompra"],
+                        Total = (decimal)reader["Total"],
+                        Estado = reader["Estado"].ToString()
+                    };
+                }
+            }
+            return compraProveedor;
+        }
+
     }
 }

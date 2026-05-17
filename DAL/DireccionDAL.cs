@@ -43,6 +43,38 @@ namespace DAL
             return lista;
         }
 
+        public Direccion ObtenerPorId(int id)
+        {
+            Direccion direccion = null;
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                string query = "SELECT * FROM Direcciones WHERE DireccionId = @id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                cmd.Parameters.AddWithValue("@id", id);
+
+                conn.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    direccion = new Direccion
+                    {
+                        DireccionId = (int)reader["DireccionId"],
+                        UsuariId = (int)reader["UsuariId"],
+                        Calle = reader["Calle"].ToString(),
+                        Ciudad = reader["Ciudad"].ToString(),
+                        Pais = reader["Pais"].ToString(),
+                        CodigoPostal = reader["CodigoPostal"].ToString()
+                    };
+                }
+            }
+
+                return direccion;
+        }
+
 
     }
 }
