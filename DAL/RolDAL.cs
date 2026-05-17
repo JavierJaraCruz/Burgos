@@ -65,6 +65,23 @@ namespace DAL
 
             return rol;
         }
+
+        public int Insertar(Rol r)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"INSERT INTO Roles (NombreRol) VALUES (
+                    @NombreRol);
+                    SELECT SCOPE_IDENTITY();";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                cmd.Parameters.AddWithValue("@NombreRol", r.NombreRol);
+                conn.Open();
+
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
     }
 
 
