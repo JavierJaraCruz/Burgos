@@ -71,6 +71,42 @@ namespace DAL
             return orden;
         }
 
+        public int Insertar(Orden o) 
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"INSERT INTO Ordenes (UsuarioId,FechaOrden,Total, Estado)" +
+                    " VALUES (@UsuarioId,@FechaOrden, @Total, @Estado);" +
+                    "SELECT SCOPE_IDENTITY();";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@UsuarioId", o.UsuarioId);
+                cmd.Parameters.AddWithValue("@FechaOrden", o.FechaOrden);
+                cmd.Parameters.AddWithValue("@Total", o.Total);
+                cmd.Parameters.AddWithValue("@Estado", o.Estado);
+
+                conn.Open();
+
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+        public void Actualizar(Orden orden)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"UPDATE Ordenes SET UsuarioId=@UsuarioId,FechaOrden=@FechaOrden,Total=@Total,
+                                Estado=@Estado WHERE OrdenId=@Id";
+                SqlCommand cmd = new SqlCommand (query, conn);
+
+                cmd.Parameters.AddWithValue("@UsuarioId", orden.UsuarioId);
+                cmd.Parameters.AddWithValue("@FechaOrden", orden.FechaOrden);
+                cmd.Parameters.AddWithValue("@Total", orden.Total);
+                cmd.Parameters.AddWithValue("@Estado", orden.Estado);
+                cmd.Parameters.AddWithValue("@Id", orden.OrdenId);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
             
     }
 }

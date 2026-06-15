@@ -68,5 +68,45 @@ namespace DAL
             return proveedor;
         }
 
+        public int Insertar(Proveedor p)
+        {
+            using(SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"INSER INTO Proveedores (Nombre,Email,Telefono,Direccion)" +
+                    "             Values (@Nombre,@Email, @Telefono,@Direccion); " +
+                    "           SELECT SCOPE_IDENTITY();";
+               SqlCommand cmd = new SqlCommand(query,conn);
+
+                cmd.Parameters.AddWithValue("@Nombre", p.Nombre);
+                cmd.Parameters.AddWithValue("@Email", p.Email);
+                cmd.Parameters.AddWithValue("@Telefono", p.Telefono);
+                cmd.Parameters.AddWithValue("@Direccion", p.Direccion);
+
+                conn.Open();
+
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+                
+        }
+
+        public void Actualizar(Proveedor proveedor) 
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"UPDATE Proveedores SET Nombre=@Nom,Email=@Ema,Telefono=@Tel,Direccion=@Direc,
+                                WHERE ProveedorId=@Id";
+                SqlCommand cmd= new SqlCommand(query,conn);
+
+                cmd.Parameters.AddWithValue("@Nom", proveedor.Nombre);
+                cmd.Parameters.AddWithValue("@Ema", proveedor.Email);
+                cmd.Parameters.AddWithValue("@Tel", proveedor.Email);
+                cmd.Parameters.AddWithValue("@Direc", proveedor.Direccion);
+                cmd.Parameters.AddWithValue("@Id", proveedor.ProveedorId);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+
     }
 }

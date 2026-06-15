@@ -75,6 +75,45 @@ namespace DAL
                 return direccion;
         }
 
+        public int Insertar(Direccion direccion)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                string query = @"INSERT INTO Direcciones (UsuariId, Calle,Ciudad,Pais,CodigoPostal
+                                VALUES(@UsuaiId,@Calle,@Ciudad,@Pais, @CodigoPostal);
+                                INSERT SCOPE_IDENTITY();";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@UsuariId", direccion.UsuariId);
+                cmd.Parameters.AddWithValue("@Calle", direccion.Calle);
+                cmd.Parameters.AddWithValue("@Ciudad", direccion.Ciudad);
+                cmd.Parameters.AddWithValue("@Pais", direccion.Pais);
+                cmd.Parameters.AddWithValue("@CodigoPostal", direccion.CodigoPostal);
+                conn.Open();
+
+                return Convert.ToInt32(cmd.ExecuteScalar());
+
+            }
+        }
+
+        public void Actualizar(Direccion direccion) 
+        {
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                string query = @"UPDATE Direcciones SET UsuarioId=@UsuarioId,Calle=@Calle,Ciudad=@Ciudad,Pais=@Pais,
+                                CodigoPosta=@CodigoPostal WHERE DireccionId=@Id";
+                SqlCommand cmd = new SqlCommand (query, conn);
+                cmd.Parameters.AddWithValue("@UsuariId", direccion.UsuariId);
+                cmd.Parameters.AddWithValue("@Calle", direccion.Calle);
+                cmd.Parameters.AddWithValue("@Ciudad", direccion.Ciudad);
+                cmd.Parameters.AddWithValue("@Pais", direccion.Pais);
+                cmd.Parameters.AddWithValue("@CodigoPostal", direccion.CodigoPostal);
+                cmd.Parameters.AddWithValue("@Id", direccion.DireccionId);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+
+            }
+        }
+
 
     }
 }

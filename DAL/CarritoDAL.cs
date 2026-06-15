@@ -62,5 +62,36 @@ namespace DAL
 
                 return carrito;
         }
+        public int Insertar(Carrito carrito) 
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"INSERT INTO Carrito(UsuarioId,FechaCreacion,Estado)
+                                VALUES(@UsuarioId,@FechaCreacion,@Estado);
+                                SELECT SCOPE_IDENTITY();";
+                SqlCommand cmd = new SqlCommand (query, conn);
+                cmd.Parameters.AddWithValue("@UsuarioId", carrito.UsuarioId);
+                cmd.Parameters.AddWithValue("@FechaCreacion", carrito.FechaCreacion);
+                cmd.Parameters.AddWithValue("@Estado", carrito.Estado);
+                conn.Open ();
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+        public void Actualizar(Carrito carrito)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"UPDATE Carrito SET UsuarioId=@UsuarioId,FechaCreacion=@FechaCreacion,
+                                    Estado=@Estado WHERE CarritoId=@Id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@UsuarioId", carrito.UsuarioId);
+                cmd.Parameters.AddWithValue("@FechaCreacion", carrito.FechaCreacion);
+                cmd.Parameters.AddWithValue("@Estado", carrito.Estado);
+                cmd.Parameters.AddWithValue("@Id", carrito.CarritoId);
+                conn.Open ();
+                cmd.ExecuteNonQuery ();
+            }
+
+        }
     }
 }

@@ -66,5 +66,40 @@ namespace DAL
 
             return categoria;
         }
+        public int Insertar(Categoria categoria)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"INSERT INTO Categoria(Nombre,Descripcion,Activo)
+                                  VALUES(@Nombre,@Descripcion,@Activo);
+                                     SELECT SCOPE_IDENTITY();";
+
+                SqlCommand cmd = new SqlCommand(query,conn);
+                cmd.Parameters.AddWithValue("@Nombre", categoria.Nombre);
+                cmd.Parameters.AddWithValue("@Descripcion", categoria.Descripcion);
+                cmd.Parameters.AddWithValue("@Activo", categoria.Activo);
+
+                conn.Open();
+
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+
+        public void Actualizar(Categoria categoria)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"UPDATE Categoria SET Nombre=@Nombre,Descripcion=@Descripcion,
+                        Activo=@Activo WHERE Categoria=@Id";
+                SqlCommand cmd = new SqlCommand (query,conn);
+                cmd.Parameters.AddWithValue("@Nombre", categoria.Nombre);
+                cmd.Parameters.AddWithValue("@Descripcion", categoria.Descripcion);
+                cmd.Parameters.AddWithValue("@Activo", categoria.Activo);
+                cmd.Parameters.AddWithValue("@Id", categoria.CategoriaId);
+                conn.Open ();
+                cmd.ExecuteNonQuery();
+            }
+
+        }
     }
 }

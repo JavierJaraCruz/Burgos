@@ -82,6 +82,21 @@ namespace DAL
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
+
+        public void Actualizar(Rol rol) 
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+
+                string query = "UPDATE Roles SET NombreRol=@NomR WHERE RolId=@Id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                cmd.Parameters.AddWithValue("@NomR", rol.NombreRol);
+                cmd.Parameters.AddWithValue("@Id", rol.RolId);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 
 

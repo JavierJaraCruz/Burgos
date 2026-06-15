@@ -112,5 +112,24 @@ namespace DAL
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
+
+        public void Actualizar(Usuario usuario) 
+        {
+            using(SqlConnection conn = new SqlConnection(connectionString)) 
+            {
+                string query = @"UPDATE Usuarios SET NombreUsuario=@Nom,Email=@Ema,PasswordHash=@Pass,Salt=@Sal
+                                       FechaRegistro=@Fecha,Estado=@Estad WHERE UsuarioId=@Id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Nom", usuario.NombreUsuario);
+                cmd.Parameters.AddWithValue("@Ema", usuario.Email);
+                cmd.Parameters.AddWithValue("@Pass", usuario.PasswordHash);
+                cmd.Parameters.AddWithValue("@Sal", usuario.Salt);
+                cmd.Parameters.AddWithValue("@Fecha", usuario.FechaRegistro);
+                cmd.Parameters.AddWithValue("@Estad", usuario.Estado);
+                cmd.Parameters.AddWithValue("@Id", usuario.UsuarioId);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }
