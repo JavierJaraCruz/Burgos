@@ -1,0 +1,47 @@
+﻿@model Web.ViewModels.ProveedorViewModel
+
+@{
+    ViewBag.Title = "Detalle del Proveedor";
+}
+
+<h2>Detalle del Proveedor</h2>
+
+<hr />
+
+<dl class="dl-horizontal">
+
+    
+    <dt>ID</dt>
+    <dd>@Model.ProveedorId</dd>
+
+    <dt>Nombre</dt>
+    <dd>@Model.Nombre</dd>
+
+    <dt>Email</dt>
+    <dd>@Model.Email</dd>
+
+    <dt>Teléfono</dt>
+    <dd>@Model.Telefono</dd>
+
+    <dt>Dirección</dt>
+    <dd>@Model.Direccion</dd>
+    
+
+</dl>
+
+<p>
+    @Html.ActionLink(
+        "Editar",
+        "Editar",
+        new { id = Model.ProveedorId },
+        new { @class = "btn btn-primary" })
+
+    
+    @Html.ActionLink(
+        "Volver",
+        "Index",
+        null,
+        new { @class = "btn btn-secondary" })
+    
+
+</p>

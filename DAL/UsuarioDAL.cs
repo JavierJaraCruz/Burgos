@@ -11,7 +11,7 @@ namespace DAL
 {
     public class UsuarioDAL
     {       //Preparar la cadema de conexion o TEXTO DE CONEXION
-        private readonly string connectionString =  ConfigurationManager.ConnectionStrings["Skart"].ConnectionString;
+        private readonly string connectionString =  ConfigurationManager.ConnectionStrings["burgos"].ConnectionString;
 
 
         //creamos el metodo o funcion a utilizar del tipo List porque devolveremos una lista
@@ -127,6 +127,18 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@Fecha", usuario.FechaRegistro);
                 cmd.Parameters.AddWithValue("@Estad", usuario.Estado);
                 cmd.Parameters.AddWithValue("@Id", usuario.UsuarioId);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void Eliminar(int id)
+        { 
+            using(SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "DELETE FROM Usuarios WHERE UsuarioId=@id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", id);
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }

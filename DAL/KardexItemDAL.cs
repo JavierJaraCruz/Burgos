@@ -18,8 +18,8 @@ namespace DAL
             var lista = new List<KardexItem>();
 
             using(SqlConnection conn = new SqlConnection(connectionString)) 
-            { 
-                string query = "SELECT * FROM "
+            {
+                string query = "SELECT * FROM ";
             }
 
             return lista;

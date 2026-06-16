@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Entities.Rol>
+@{
+    ViewBag.Title = "Roles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h2>Roles</h2>
+    <p>@Html.ActionLink("➕ Crear Nuevo", "Crear", null, new { @class = "btn btn-primary" })</p>
+</div>
+
+<table id="rolesTable" class="styled-table">
+    <thead>
+        <tr>
+            <th>Nombre Rol</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.NombreRol</td>
+                <td>
+                    @Html.ActionLink("✏️ Editar", "Editar", new { id = r.RolId }, new { @class = "btn btn-warning btn-sm" })
+                    @Html.ActionLink("🔍 Detalle", "Detalle", new { id = r.RolId }, new { @class = "btn btn-info btn-sm" })
+                    @Html.ActionLink("🗑 Eliminar", "Eliminar", new { id = r.RolId }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button id="clearSearchRoles" class="btn btn-secondary">🧹 Borrar búsqueda</button>
+
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+            var table = $('#rolesTable').DataTable({
+                paging: true,
+                pageLength: 10,
+                lengthMenu: [5, 10, 25, 50],
+                ordering: true,
+                searching: true,
+                language: { search: "🔎 Buscar:" }
+            });
+            $('#clearSearchRoles').on('click', function () { table.search('').draw(); });
+        });</script>
+}

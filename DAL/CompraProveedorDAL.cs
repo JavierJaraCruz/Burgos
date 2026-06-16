@@ -11,7 +11,7 @@ namespace DAL
 {
     public class CompraProveedorDAL
     {
-        private readonly string ConnectionString = ConfigurationManager.ConnectionStrings["Skart"].ConnectionString;
+        private readonly string ConnectionString = ConfigurationManager.ConnectionStrings["burgos"].ConnectionString;
 
         public List<CompraProveedor> Listar() 
         {
@@ -106,6 +106,17 @@ namespace DAL
                 cmd.ExecuteNonQuery();
 
 
+            }
+        }
+        public void Eliminar(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                string query = "DELETE FROM CompraProveedor WHERE CompraId=@Id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Id", id);
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
 

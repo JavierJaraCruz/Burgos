@@ -11,13 +11,11 @@ namespace DAL
 {
     public class ProveedorDAL
     {
-        private readonly string connectionString = ConfigurationManager.ConnectionStrings["SkartDB"].ConnectionString;
-
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["burgos"].ConnectionString;
 
         public List<Proveedor> Listar()
         {
             var lista = new List<Proveedor>();
-
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string query = "SELECT * FROM Proveedores";
@@ -39,74 +37,86 @@ namespace DAL
             return lista;
         }
 
-        public Proveedor ObtenerPorId(int id) 
-        { 
+        public Proveedor ObtenerProveedor(int id)
+        {
             Proveedor proveedor = null;
-
-                using (SqlConnection conn = new SqlConnection(connectionString)) 
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM Proveedores WHERE ProveedorId=@id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
                 {
-                    string query = "SELECT * FROM Proveedores WHERE ProveedorId = @id";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@id", id);
-                    conn.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
-                        
-                    if(reader.Read())
+                    proveedor = new Proveedor
                     {
-                        proveedor = new Proveedor 
-                        {
-                            ProveedorId = (int)reader["ProveedorId"],
-                            Nombre = reader["Nombre"].ToString(),
-                            Email = reader["Email"].ToString(),
-                            Telefono = reader["Telefono"].ToString(),
-                            Direccion = reader["Direccion"].ToString()
-
-                        };
-                    }
+                        ProveedorId = (int)reader["ProveedorId"],
+                        Nombre = reader["Nombre"].ToString(),
+                        Email = reader["Email"].ToString(),
+                        Telefono = reader["Telefono"].ToString(),
+                        Direccion = reader["Direccion"].ToString()
+                    };
                 }
-
+            }
             return proveedor;
         }
 
         public int Insertar(Proveedor p)
         {
-            using(SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = @"INSER INTO Proveedores (Nombre,Email,Telefono,Direccion)" +
-                    "             Values (@Nombre,@Email, @Telefono,@Direccion); " +
-                    "           SELECT SCOPE_IDENTITY();";
-               SqlCommand cmd = new SqlCommand(query,conn);
-
-                cmd.Parameters.AddWithValue("@Nombre", p.Nombre);
-                cmd.Parameters.AddWithValue("@Email", p.Email);
-                cmd.Parameters.AddWithValue("@Telefono", p.Telefono);
-                cmd.Parameters.AddWithValue("@Direccion", p.Direccion);
-
                 conn.Open();
+                SqlTransaction tx = conn.BeginTransaction();
+                try
+                {
+                    string query = @"INSERT INTO Proveedores (Nombre,Email,Telefono,Direccion)
+                             VALUES (@Nombre,@Email,@Tel,@Dir); SELECT SCOPE_IDENTITY();";
+                    SqlCommand cmd = new SqlCommand(query, conn, tx);
+                    cmd.Parameters.AddWithValue("@Nombre", p.Nombre);
+                    cmd.Parameters.AddWithValue("@Email", p.Email ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Tel", p.Telefono ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Dir", p.Direccion ?? (object)DBNull.Value);
+                    int id = Convert.ToInt32(cmd.ExecuteScalar());
 
-                return Convert.ToInt32(cmd.ExecuteScalar());
+                    tx.Commit();
+                    return id;
+                }
+                catch
+                {
+                    tx.Rollback();
+                    throw;
+                }
             }
-                
         }
 
-        public void Actualizar(Proveedor proveedor) 
+        public void Actualizar(Proveedor p)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = @"UPDATE Proveedores SET Nombre=@Nom,Email=@Ema,Telefono=@Tel,Direccion=@Direc,
-                                WHERE ProveedorId=@Id";
-                SqlCommand cmd= new SqlCommand(query,conn);
-
-                cmd.Parameters.AddWithValue("@Nom", proveedor.Nombre);
-                cmd.Parameters.AddWithValue("@Ema", proveedor.Email);
-                cmd.Parameters.AddWithValue("@Tel", proveedor.Email);
-                cmd.Parameters.AddWithValue("@Direc", proveedor.Direccion);
-                cmd.Parameters.AddWithValue("@Id", proveedor.ProveedorId);
+                string query = @"UPDATE Proveedores SET Nombre=@Nombre,Email=@Email,Telefono=@Tel,Direccion=@Dir
+                                 WHERE ProveedorId=@Id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Nombre", p.Nombre);
+                cmd.Parameters.AddWithValue("@Email", p.Email ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Tel", p.Telefono ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Dir", p.Direccion ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Id", p.ProveedorId);
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
         }
 
-
+        public void Eliminar(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "DELETE FROM Proveedores WHERE ProveedorId=@Id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Id", id);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

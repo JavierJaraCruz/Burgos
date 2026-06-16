@@ -27,6 +27,8 @@ namespace Entities
         [Required]
         public int CategoriaId { get; set; }
 
+        public string CategoriaNombre { get; set; }
+
         public bool Activo { get; set; }
 
         [StringLength(200)]

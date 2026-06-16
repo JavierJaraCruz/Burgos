@@ -11,7 +11,7 @@ namespace DAL
 {
     public class CarritoDetalleDAL
     {
-        private readonly string connectionString = ConfigurationManager.ConnectionStrings["Skart"].ConnectionString;
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["burgos"].ConnectionString;
 
         public List<CarritoDetalle> Listar() 
         { 
@@ -103,6 +103,18 @@ namespace DAL
 
             }
 
+        }
+
+        public void Eliminar(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "DELETE FROM CarritoDetalle WHERE CarritoDetalleId=@Id";
+                SqlCommand cmd = new SqlCommand(query,conn);
+                cmd.Parameters.AddWithValue("@Id", id);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
         }
 
         

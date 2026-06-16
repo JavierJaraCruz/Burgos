@@ -41,8 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarritoService.cs" />
+    <Compile Include="CategoriaService.cs" />
+    <Compile Include="CompraService.cs" />
+    <Compile Include="InventarioService.cs" />
+    <Compile Include="KardexService.cs" />
+    <Compile Include="OrdenService.cs" />
+    <Compile Include="PassWordHelper.cs" />
     <Compile Include="ProductoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProveedorService.cs" />
+    <Compile Include="RolService.cs" />
+    <Compile Include="UsuarioService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

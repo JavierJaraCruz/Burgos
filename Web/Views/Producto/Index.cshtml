@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Web.ViewModels.ProductoViewModel>
+
+@{
+    ViewBag.Title = "Productos";
+}
+
+<h2>Productos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Producto", "Crear", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Categoría</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImagenUrl))
+                    {
+                        <img src="@item.ImagenUrl" width="80" />
+                    }
+                </td>
+                <td>@item.Nombre</td>
+                <td>S/. @item.Precio</td>
+                <td>@item.Stock</td>
+                <td>@item.CategoriaNombre</td>
+                <td>
+                    @Html.ActionLink("Detalle", "Detalle", new { id = item.ProductoId }) |
+                    @Html.ActionLink("Editar", "Editar", new { id = item.ProductoId }) |
+                    @Html.ActionLink("Eliminar", "Eliminar", new { id = item.ProductoId })
+                    @Html.ActionLink(
+                                    "Kardex",
+                                    "Index",
+                                    "Kardex",
+                                    new { productoId = item.ProductoId },
+                                    null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

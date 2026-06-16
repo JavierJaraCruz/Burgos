@@ -11,49 +11,41 @@ namespace DAL
 {
     public class OrdenDAL
     {
-        private readonly string connectionString = ConfigurationManager.ConnectionStrings["Skart"].ConnectionString;
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["burgos"].ConnectionString;
 
-        public List<Orden> Listar() 
+        public List<Orden> ListarOrdenes()
         {
             var lista = new List<Orden>();
-
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "SELECT ¨* FROM Ordenes";
+                string query = "SELECT * FROM Ordenes";
                 SqlCommand cmd = new SqlCommand(query, conn);
-
                 conn.Open();
-
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    lista.Add(new Orden { 
+                    lista.Add(new Orden
+                    {
                         OrdenId = (int)reader["OrdenId"],
                         UsuarioId = (int)reader["UsuarioId"],
                         FechaOrden = (DateTime)reader["FechaOrden"],
                         Total = (decimal)reader["Total"],
                         Estado = reader["Estado"].ToString()
                     });
-                
                 }
             }
-
-
             return lista;
         }
 
-        public Orden ObtenerPorId(int id) 
+        public Orden ObtenerPorId(int id)
         {
             Orden orden = null;
-
-            using(SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "SELECT * FROM Ordenes WHERE OrdenId = @id ";
-                SqlCommand cmd = new SqlCommand(@query, conn);
-
-                cmd.Parameters.AddWithValue("id", id);
+                string query = "SELECT * FROM Ordenes WHERE OrdenId=@id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", id);
                 conn.Open();
-
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
@@ -67,46 +59,65 @@ namespace DAL
                     };
                 }
             }
-
             return orden;
         }
 
-        public int Insertar(Orden o) 
+        public int InsertarOrden(int usuarioId, List<OrdenDetalle> detalles)
         {
+            int ordenId;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = @"INSERT INTO Ordenes (UsuarioId,FechaOrden,Total, Estado)" +
-                    " VALUES (@UsuarioId,@FechaOrden, @Total, @Estado);" +
-                    "SELECT SCOPE_IDENTITY();";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@UsuarioId", o.UsuarioId);
-                cmd.Parameters.AddWithValue("@FechaOrden", o.FechaOrden);
-                cmd.Parameters.AddWithValue("@Total", o.Total);
-                cmd.Parameters.AddWithValue("@Estado", o.Estado);
-
                 conn.Open();
+                SqlTransaction tx = conn.BeginTransaction();
 
-                return Convert.ToInt32(cmd.ExecuteScalar());
+                try
+                {
+                    string queryOrden = @"INSERT INTO Ordenes (UsuarioId,FechaOrden,Total,Estado)
+                                          VALUES (@UsuarioId,GETDATE(),@Total,'Confirmada');
+                                          SELECT SCOPE_IDENTITY();";
+                    decimal total = 0;
+                    foreach (var d in detalles) total += d.Subtotal;
+
+                    SqlCommand cmdOrden = new SqlCommand(queryOrden, conn, tx);
+                    cmdOrden.Parameters.AddWithValue("@UsuarioId", usuarioId);
+                    cmdOrden.Parameters.AddWithValue("@Total", total);
+                    ordenId = Convert.ToInt32(cmdOrden.ExecuteScalar());
+
+                    foreach (var d in detalles)
+                    {
+                        string queryDetalle = @"INSERT INTO OrdenDetalle (OrdenId,ProductoId,Cantidad,PrecioUnitario,Subtotal)
+                                                VALUES (@OrdenId,@Prod,@Cant,@Precio,@Subtotal)";
+                        SqlCommand cmdDet = new SqlCommand(queryDetalle, conn, tx);
+                        cmdDet.Parameters.AddWithValue("@OrdenId", ordenId);
+                        cmdDet.Parameters.AddWithValue("@Prod", d.ProductoId);
+                        cmdDet.Parameters.AddWithValue("@Cant", d.Cantidad);
+                        cmdDet.Parameters.AddWithValue("@Precio", d.PrecioUnitario);
+                        cmdDet.Parameters.AddWithValue("@Subtotal", d.Subtotal);
+                        cmdDet.ExecuteNonQuery();
+                    }
+
+                    tx.Commit();
+                }
+                catch
+                {
+                    tx.Rollback();
+                    throw;
+                }
             }
+            return ordenId;
         }
-        public void Actualizar(Orden orden)
+
+        public void ActualizarEstado(int ordenId, string estado)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = @"UPDATE Ordenes SET UsuarioId=@UsuarioId,FechaOrden=@FechaOrden,Total=@Total,
-                                Estado=@Estado WHERE OrdenId=@Id";
-                SqlCommand cmd = new SqlCommand (query, conn);
-
-                cmd.Parameters.AddWithValue("@UsuarioId", orden.UsuarioId);
-                cmd.Parameters.AddWithValue("@FechaOrden", orden.FechaOrden);
-                cmd.Parameters.AddWithValue("@Total", orden.Total);
-                cmd.Parameters.AddWithValue("@Estado", orden.Estado);
-                cmd.Parameters.AddWithValue("@Id", orden.OrdenId);
+                string query = "UPDATE Ordenes SET Estado=@Estado WHERE OrdenId=@Id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Estado", estado);
+                cmd.Parameters.AddWithValue("@Id", ordenId);
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
         }
-
-            
     }
 }

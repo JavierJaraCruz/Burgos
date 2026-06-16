@@ -11,7 +11,7 @@ namespace DAL
 {
     public class CategoriaDAL
     {
-        private readonly string connectionString = ConfigurationManager.ConnectionStrings["Skart"].ConnectionString;
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["burgos"].ConnectionString;
 
         public List<Categoria> Listar()
         { 
@@ -30,7 +30,7 @@ namespace DAL
                         CategoriaId = (int)reader["CategoriaId"],
                         Nombre = reader["Nombre"].ToString(),
                         Descripcion = reader["Descripcion"].ToString(),
-                        Activo = (bool)reader["Activo"]
+                       
                     });
                 }
             }
@@ -56,7 +56,7 @@ namespace DAL
                         CategoriaId = (int)reader["CategoriaId"],
                         Nombre = reader["Nombre"].ToString(),
                         Descripcion = reader["Descripcion"].ToString(),
-                        Activo = (bool)reader["Activo"]
+                        
                     };
                 }
                   
@@ -70,14 +70,14 @@ namespace DAL
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = @"INSERT INTO Categoria(Nombre,Descripcion,Activo)
-                                  VALUES(@Nombre,@Descripcion,@Activo);
+                string query = @"INSERT INTO Categorias(Nombre,Descripcion)
+                                  VALUES(@Nombre,@Descripcion);
                                      SELECT SCOPE_IDENTITY();";
 
                 SqlCommand cmd = new SqlCommand(query,conn);
                 cmd.Parameters.AddWithValue("@Nombre", categoria.Nombre);
                 cmd.Parameters.AddWithValue("@Descripcion", categoria.Descripcion);
-                cmd.Parameters.AddWithValue("@Activo", categoria.Activo);
+              
 
                 conn.Open();
 
@@ -89,17 +89,28 @@ namespace DAL
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = @"UPDATE Categoria SET Nombre=@Nombre,Descripcion=@Descripcion,
-                        Activo=@Activo WHERE Categoria=@Id";
+                string query = @"UPDATE Categorias SET Nombre=@Nombre,Descripcion=@Descripcion
+                         WHERE CategoriaId=@Id";
                 SqlCommand cmd = new SqlCommand (query,conn);
                 cmd.Parameters.AddWithValue("@Nombre", categoria.Nombre);
                 cmd.Parameters.AddWithValue("@Descripcion", categoria.Descripcion);
-                cmd.Parameters.AddWithValue("@Activo", categoria.Activo);
+               
                 cmd.Parameters.AddWithValue("@Id", categoria.CategoriaId);
                 conn.Open ();
                 cmd.ExecuteNonQuery();
             }
 
+        }
+        public void Eliminar(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "DELETE FROM Categorias WHERE CategoriaId=@Id";
+                SqlCommand cmd = new SqlCommand(query,conn);
+                cmd.Parameters.AddWithValue ("@Id", id);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 }

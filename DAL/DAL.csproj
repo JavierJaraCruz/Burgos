@@ -45,9 +45,11 @@
     <Compile Include="CarritoDAL.cs" />
     <Compile Include="CarritoDetalleDAL.cs" />
     <Compile Include="CategoriaDAL.cs" />
+    <Compile Include="CompraDAL.cs" />
     <Compile Include="CompraDetalleDAL.cs" />
     <Compile Include="CompraProveedorDAL.cs" />
     <Compile Include="DireccionDAL.cs" />
+    <Compile Include="InventarioDAL.cs" />
     <Compile Include="InventarioMovimientoDAL.cs" />
     <Compile Include="KardexItemDAL.cs" />
     <Compile Include="OrdenDAL.cs" />

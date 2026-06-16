@@ -16,7 +16,7 @@ namespace DAL
 
     {
 
-        private readonly string connectionString = ConfigurationManager.ConnectionStrings["SkartDB"].ConnectionString;
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["burgos"].ConnectionString;
 
 
 
@@ -30,7 +30,12 @@ namespace DAL
 
             {
 
-                string query = "SELECT * FROM Productos";
+                string query = @"SELECT
+                        p.*,
+                        c.Nombre AS CategoriaNombre
+                    FROM Productos p
+                    INNER JOIN Categorias c
+                        ON p.CategoriaId = c.CategoriaId";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -60,7 +65,8 @@ namespace DAL
 
                         Activo = (bool)reader["Activo"],
 
-                        ImagenUrl = reader["ImagenUrl"].ToString()
+                        ImagenUrl = reader["ImagenUrl"].ToString(),
+                        CategoriaNombre = reader["CategoriaNombre"].ToString()
 
                     });
 
@@ -82,7 +88,13 @@ namespace DAL
 
             {
 
-                string query = "SELECT * FROM Productos WHERE ProductoId=@id";
+                string query = @"SELECT
+                        Productos.*,
+                        Categorias.Nombre AS CategoriaNombre
+                    FROM Productos
+                    INNER JOIN Categorias
+                        ON Productos.CategoriaId = Categorias.CategoriaId
+                    WHERE Productos.ProductoId = @id";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -114,7 +126,8 @@ namespace DAL
 
                         Activo = (bool)reader["Activo"],
 
-                        ImagenUrl = reader["ImagenUrl"].ToString()
+                        ImagenUrl = reader["ImagenUrl"].ToString(),
+                        CategoriaNombre = reader["CategoriaNombre"].ToString()
 
                     };
 

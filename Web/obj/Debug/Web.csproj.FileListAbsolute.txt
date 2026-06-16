@@ -84,3 +84,9 @@ C:\Users\edu\source\repos\Burgos\Web\obj\Debug\Web.csproj.CoreCompileInputs.cach
 C:\Users\edu\source\repos\Burgos\Web\obj\Debug\Web.csproj.Up2Date
 C:\Users\edu\source\repos\Burgos\Web\obj\Debug\Web.dll
 C:\Users\edu\source\repos\Burgos\Web\obj\Debug\Web.pdb
+C:\Users\edu\source\repos\Burgos\Web\bin\Entities.dll
+C:\Users\edu\source\repos\Burgos\Web\bin\Services.dll
+C:\Users\edu\source\repos\Burgos\Web\bin\DAL.dll
+C:\Users\edu\source\repos\Burgos\Web\bin\Entities.pdb
+C:\Users\edu\source\repos\Burgos\Web\bin\Services.pdb
+C:\Users\edu\source\repos\Burgos\Web\bin\DAL.pdb

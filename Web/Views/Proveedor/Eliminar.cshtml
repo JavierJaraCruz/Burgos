@@ -1,0 +1,50 @@
+﻿@model Web.ViewModels.ProveedorViewModel
+
+@{
+    ViewBag.Title = "Eliminar Proveedor";
+}
+
+<h2>Eliminar Proveedor</h2>
+
+<h4>¿Está seguro de eliminar este proveedor?</h4>
+
+<hr />
+
+<dl class="dl-horizontal">
+
+   
+    <dt>ID</dt>
+    <dd>@Model.ProveedorId</dd>
+
+    <dt>Nombre</dt>
+    <dd>@Model.Nombre</dd>
+
+    <dt>Email</dt>
+    <dd>@Model.Email</dd>
+
+    <dt>Teléfono</dt>
+    <dd>@Model.Telefono</dd>
+
+    <dt>Dirección</dt>
+    <dd>@Model.Direccion</dd>
+    
+
+</dl>
+
+@using (Html.BeginForm("EliminarConfirmado", "Proveedor", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.ProveedorId)
+
+
+    <button type="submit" class="btn btn-danger">
+        Eliminar
+    </button>
+
+    @Html.ActionLink(
+        "Cancelar",
+        "Index",
+        null,
+        new { @class = "btn btn-secondary" })
+
+
+}

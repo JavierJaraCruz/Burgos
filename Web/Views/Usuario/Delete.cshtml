@@ -1,0 +1,42 @@
+﻿@model Entities.Usuario
+@{
+    ViewBag.Title = "Eliminar Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="page-header">
+    <h2>Eliminar Usuario</h2>
+</div>
+
+<div class="details-card">
+    <p>¿Está seguro que desea eliminar este usuario?</p>
+    <div class="detail-row">
+        <span class="detail-label">Nombre Usuario:</span>
+        <span class="detail-value">@Model.NombreUsuario</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">Email:</span>
+        <span class="detail-value">@Model.Email</span>
+    </div>
+</div>
+
+
+@using (Html.BeginForm("Delete", "Usuario", FormMethod.Post, new { @id = "deleteForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("id", Model.UsuarioId)
+
+    <button type="submit" class="btn btn-danger">🗑 Eliminar</button>
+    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-secondary" })
+}
+
+@section Scripts {
+    <script>
+    document.getElementById("deleteForm").addEventListener("submit", function (e) {
+            if (!confirm("⚠️ ¿Está seguro que desea eliminar este usuario? Esta acción no se puede deshacer.")) {
+                e.preventDefault();
+            }
+        });</script>
+}

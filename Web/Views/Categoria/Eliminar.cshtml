@@ -1,0 +1,43 @@
+﻿@model Web.ViewModels.CategoriaViewModel
+
+@{
+    ViewBag.Title = "Eliminar Categoría";
+}
+
+<h2>Eliminar Categoría</h2>
+
+<h4>¿Está seguro de eliminar esta categoría?</h4>
+
+<hr />
+
+<dl class="dl-horizontal">
+
+    <dt>ID</dt>
+    <dd>@Model.CategoriaId</dd>
+
+    <dt>Nombre</dt>
+    <dd>@Model.Nombre</dd>
+
+    <dt>Descripción</dt>
+    <dd>@Model.Descripcion</dd>
+ 
+
+</dl>
+
+@using (Html.BeginForm("EliminarConfirmado", "Categoria", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.CategoriaId)
+
+
+    <button type="submit" class="btn btn-danger">
+        Eliminar
+    </button>
+
+    @Html.ActionLink(
+        "Cancelar",
+        "Index",
+        null,
+        new { @class = "btn btn-secondary" })
+
+
+}

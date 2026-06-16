@@ -12,7 +12,7 @@ namespace DAL
 {
     public class RolDAL
     {
-        private readonly string connectionString = ConfigurationManager.ConnectionStrings["Skart"].ConnectionString; 
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["burgos"].ConnectionString; 
 
         public List<Rol> Listar()
         {
@@ -93,6 +93,17 @@ namespace DAL
 
                 cmd.Parameters.AddWithValue("@NomR", rol.NombreRol);
                 cmd.Parameters.AddWithValue("@Id", rol.RolId);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+        public void Eliminar(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "DELETE FROM Roles WHERE RolId=@Id";
+                SqlCommand cmd = new SqlCommand(query,conn);
+                cmd.Parameters.AddWithValue("@Id", id);
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }

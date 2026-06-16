@@ -11,7 +11,7 @@ namespace DAL
 {
     public class InventarioMovimientoDAL
     {
-        private readonly string ConnectionString = ConfigurationManager.ConnectionStrings["Skart"].ConnectionString;
+        private readonly string ConnectionString = ConfigurationManager.ConnectionStrings["burgos"].ConnectionString;
 
         public List<InventarioMovimiento> Listar()
         {
@@ -110,6 +110,17 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@FechaMovimiento", inventarioM.FechaMovimiento);
                 cmd.Parameters.AddWithValue("@Referencia", inventarioM.Referencia);
                 cmd.Parameters.AddWithValue("@Id", inventarioM.MovimientoId);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+        public void Eliminar(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                string query = "DELETE FROM InventarioMovimiento WHERE MovimientoId=@Id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Id", id);
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }

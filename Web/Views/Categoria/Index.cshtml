@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Web.ViewModels.CategoriaViewModel>
+
+@{
+    ViewBag.Title = "Categorías";
+}
+
+<h2>Categorías</h2>
+
+<p>
+    @Html.ActionLink("Nueva Categoría", "Crear", null,
+        new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CategoriaId</td>
+                <td>@item.Nombre</td>
+                <td>@item.Descripcion</td>
+
+                <td>
+                    @Html.ActionLink("Detalle", "Detalle",
+                        new { id = item.CategoriaId }) |
+
+                    @Html.ActionLink("Editar", "Editar",
+                        new { id = item.CategoriaId }) |
+
+                    @Html.ActionLink("Eliminar", "Eliminar",
+                        new { id = item.CategoriaId })
+                </td>
+            </tr>
+        }
+    </tbody>
+   
+
+</table>

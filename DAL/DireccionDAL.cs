@@ -11,7 +11,7 @@ namespace DAL
 {
     public class DireccionDAL
     {
-        private readonly string ConnectionString = ConfigurationManager.ConnectionStrings["Skart"].ConnectionString;
+        private readonly string ConnectionString = ConfigurationManager.ConnectionStrings["burgos"].ConnectionString;
 
         public List<Direccion> Listar()
         { 
@@ -111,6 +111,17 @@ namespace DAL
                 conn.Open();
                 cmd.ExecuteNonQuery();
 
+            }
+        }
+        public void Eliminar(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                string query = "DELETE FROM Direcciones WHERE DireccionId=@Id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Id", id);
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
 

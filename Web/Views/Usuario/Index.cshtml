@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Entities.Usuario>
+@{
+    ViewBag.Title = "Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h2>Usuarios</h2>
+    <p>
+        @Html.ActionLink("➕ Crear Nuevo", "Crear", null, new { @class = "btn btn-primary" })
+    </p>
+</div>
+
+<div class="table-container">
+    <table id="usuariosTable" class="styled-table">
+        <thead>
+            <tr>
+                <th>Nombre Usuario</th>
+                <th>Email</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var u in Model)
+            {
+                <tr>
+                    <td>@u.NombreUsuario</td>
+                    <td>@u.Email</td>
+                    <td>@(u.Estado ? "Activo" : "Inactivo")</td>
+                    <td>
+                        @Html.ActionLink("✏️ Editar", "Editar", new { id = u.UsuarioId }, new { @class = "btn btn-warning btn-sm" })
+                        @Html.ActionLink("🔍 Detalle", "Detalle", new { id = u.UsuarioId }, new { @class = "btn btn-info btn-sm" })
+                        @Html.ActionLink("🗑 Eliminar", "Delete", new { id = u.UsuarioId }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="actions-bar">
+    <button id="clearSearch" class="btn btn-secondary">🧹 Borrar búsqueda</button>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+
+    <script>
+    $(document).ready(function () {
+            var table = $('#usuariosTable').DataTable({
+                paging: true,
+                pageLength: 10,
+                lengthMenu: [5, 10, 25, 50],
+                ordering: true,
+                searching: true,
+                language: {
+                    search: "🔎 Buscar:",
+                    lengthMenu: "Mostrar _MENU_ filas",
+                    info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    paginate: {
+                        first: "Primero",
+                        last: "Último",
+                        next: "Siguiente",
+                        previous: "Anterior"
+                    }
+                }
+            });
+
+            $('#clearSearch').on('click', function () {
+                table.search('').draw();
+            });
+        });</script>
+}

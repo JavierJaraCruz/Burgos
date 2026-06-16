@@ -11,7 +11,7 @@ namespace DAL
 {
     public class OrdenDetalleDAL
     {
-        private readonly string connectionString = ConfigurationManager.ConnectionStrings["Skart"].ConnectionString;
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["burgos"].ConnectionString;
 
         public List<OrdenDetalle> Listar() 
         {
@@ -111,6 +111,18 @@ namespace DAL
                 cmd.Parameters.AddWithValue("@PrecioUnitario", ordenD.PrecioUnitario);
                 cmd.Parameters.AddWithValue("@SubTotal", ordenD.Subtotal);
                 cmd.Parameters.AddWithValue("@Id", ordenD.OrdenDetalleId);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void Eliminar(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "DELETE FROM OrdenDetalle WHERE OrdenDetalleId=@Id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Id", id);
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Web.ViewModels.ProveedorViewModel>
+
+@{
+    ViewBag.Title = "Proveedores";
+}
+
+<h2>Proveedores</h2>
+
+<p>
+    @Html.ActionLink(
+        "Nuevo Proveedor",
+        "Crear",
+        null,
+        new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered">
+
+    
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProveedorId</td>
+                <td>@item.Nombre</td>
+                <td>@item.Email</td>
+                <td>@item.Telefono</td>
+                <td>@item.Direccion</td>
+
+                <td>
+                    @Html.ActionLink("Detalle", "Detalle",
+                        new { id = item.ProveedorId }) |
+
+                    @Html.ActionLink("Editar", "Editar",
+                        new { id = item.ProveedorId }) |
+
+                    @Html.ActionLink("Eliminar", "Eliminar",
+                        new { id = item.ProveedorId })
+                </td>
+            </tr>
+        }
+    </tbody>
+    
+
+</table>
