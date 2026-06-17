@@ -6,6 +6,7 @@ using Web.ViewModels;
 
 namespace Web.Controllers
 {
+    [ValidarSesion]
     public class ProductoController : Controller
     {
         private readonly ProductoService productoService = new ProductoService();

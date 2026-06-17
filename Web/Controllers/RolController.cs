@@ -4,6 +4,7 @@ using System.Web.Mvc;
 
 namespace Web.Controllers
 {
+    [ValidarSesion]
     public class RolController : Controller
     {
         private readonly RolService rolService = new RolService();

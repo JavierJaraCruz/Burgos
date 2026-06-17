@@ -48,6 +48,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="CompraDetalle.cs" />
     <Compile Include="CompraProveedor.cs" />
+    <Compile Include="Dashboard.cs" />
     <Compile Include="Direccion.cs" />
     <Compile Include="InventarioMovimiento.cs" />
     <Compile Include="KardexItem.cs" />

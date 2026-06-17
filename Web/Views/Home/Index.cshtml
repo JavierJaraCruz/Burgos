@@ -1,33 +1,63 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model Web.ViewModels.DashboardViewModel
+@{
+    ViewBag.Title = "Panel de Control";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+<div class="page-header">
+    <h1>Panel de Control</h1>
+</div>
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+<div class="dashboard-grid">
+
+    <div class="stat-card">
+        <div class="stat-icon icon-blue">📦</div>
+        <div class="stat-info">
+            <h3>@Model.CantidadProductos</h3>
+            <p>Productos</p>
+        </div>
     </div>
-</main>
+
+    <div class="stat-card">
+        <div class="stat-icon icon-green">🛒</div>
+        <div class="stat-info">
+            <h3>@Model.CantidadVentas</h3>
+            <p>Ventas</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon icon-orange">⚠️</div>
+        <div class="stat-info">
+            <h3>@Model.StockBajo</h3>
+            <p>Stock Bajo</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon icon-purple">💵</div>
+        <div class="stat-info">
+            <h3>@Model.TotalVentasMonto.ToString("C2", new System.Globalization.CultureInfo("es-PE"))</h3>
+            <p>Total Ventas</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="status-main-card">
+    <div class="status-content">
+        @if (Model.StockBajo == 0)
+        {
+            <div class="status-circle-success">
+                <span class="checkmark">✓</span>
+            </div>
+        }
+        else
+        {
+            <div class="status-circle-warning" style="background-color: #fef3c7; color: #d97706; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px;">
+                <span>!</span>
+            </div>
+        }
+        <p class="status-text">@Model.MensajeEstado</p>
+    </div>
+</div>

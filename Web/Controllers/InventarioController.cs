@@ -3,6 +3,7 @@ using System.Web.Mvc;
 
 namespace Web.Controllers
 {
+    [ValidarSesion]
     public class InventarioController : Controller
     {
         private readonly InventarioService inventarioService = new InventarioService();

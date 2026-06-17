@@ -2,29 +2,53 @@
 using Services;
 using System;
 using System.Net;
-using System.Reflection;
 using System.Web.Mvc;
+using Web.ViewModels; // Asegúrate de que apunte al namespace correcto de tus ViewModels
 
 namespace Web.Controllers
 {
+    [ValidarSesion]
     public class UsuarioController : Controller
     {
         private readonly UsuarioService usuarioService = new UsuarioService();
 
+        // GET: Usuario
         public ActionResult Index() => View(usuarioService.ListarUsuarios());
 
-        public ActionResult Detalle(int id) => View(usuarioService.ObtenerUsuario(id));
+        // GET: Usuario/Detalle/5
 
+        // GET: Usuario/Detalle/5
+        public ActionResult Detalle(int id)
+        {
+            var usuario = usuarioService.ObtenerUsuario(id);
+            if (usuario == null) return HttpNotFound();
+
+            ViewBag.RolNombre = usuarioService.ObtenerNombreRolPorUsuario(id);
+
+            return View(usuario);
+        }
+        // GET: Usuario/Crear
         [HttpGet]
-        public ActionResult Crear() => View();
+        public ActionResult Crear()
+        {
+            // Cargamos la lista de roles desde la DB para llenar el combo desplegable
+            //  ¡AHORA SÍ! Apunta a "NombreRol"
+            ViewBag.Roles = new SelectList(usuarioService.ListarRoles(), "RolId", "NombreRol");
+            return View();
+        }
 
+        // POST: Usuario/Crear
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(UsuarioEditViewModel model)
+
+        public ActionResult Crear(UsuarioEditViewModel model)
         {
+            // Ya no validamos model.Password aquí porque no se lo pedimos al administrador
             if (ModelState.IsValid)
             {
                 var salt = PasswordHelper.GenerarSalt();
+
+                // Asignamos la contraseña temporal por defecto
                 var hash = PasswordHelper.GenerarPasswordHash("default123", salt);
 
                 var usuario = new Usuario
@@ -37,18 +61,28 @@ namespace Web.Controllers
                     FechaRegistro = DateTime.Now
                 };
 
-                usuarioService.CrearUsuario(usuario);
+                // 1. Creamos el usuario en la DB y obtenemos su ID
+                int nuevoUsuarioId = usuarioService.CrearUsuario(usuario);
 
-                TempData["SuccessMessage"] = "Usuario creado correctamente.";
+                // 2. Registramos la relación en la tabla intermedia UsuarioRoles
+                usuarioService.AsignarRolAUsuario(nuevoUsuarioId, model.RolId);
+
+                // Alerta informativa para recordar la clave temporal
+                TempData["SuccessMessage"] = "Usuario creado con éxito. La contraseña inicial es: default123";
                 return RedirectToAction("Index");
             }
+
+            // Si algo falla, recargamos el combo de roles para la vista
+            //  ¡AHORA SÍ! Apunta a "NombreRol"
+            ViewBag.Roles = new SelectList(usuarioService.ListarRoles(), "RolId", "NombreRol");
             return View(model);
         }
 
-
+        // GET: Usuario/Editar/5
         [HttpGet]
         public ActionResult Editar(int id) => View(usuarioService.ObtenerUsuario(id));
 
+        // POST: Usuario/Editar/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Editar(UsuarioEditViewModel model)
@@ -72,7 +106,7 @@ namespace Web.Controllers
         // GET: Usuario/Delete/5
         public ActionResult Delete(int id)
         {
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (id <= 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             var usuario = usuarioService.ObtenerUsuario(id);
             if (usuario == null) return HttpNotFound();
@@ -80,6 +114,7 @@ namespace Web.Controllers
             return View(usuario);
         }
 
+        // POST: Usuario/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

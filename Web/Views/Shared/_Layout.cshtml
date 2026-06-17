@@ -1,5 +1,6 @@
 ﻿@{
     Layout = null;
+    var controllerActual = ViewContext.RouteData.Values["controller"]?.ToString();
 }
 <!DOCTYPE html>
 <html lang="es">
@@ -7,98 +8,56 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title - Skart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    @*<link href="@Url.Content("~/Content/site.css")" rel="stylesheet" />*@
     <link href="~/Content/Site.css" rel="stylesheet" />
-    <link href="~/Content/navbar.css" rel="stylesheet" />
     <link href="~/Content/sidebar.css" rel="stylesheet" />
-    <link href="~/Content/footer.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/Content/index.css" />
-    @*<script src="~/Scripts/theme.js"></script>*@
-</head>
-<body class="dark-theme">
+    <link href="~/Content/index.css" rel="stylesheet" />
+    <link href="~/Content/create.css" rel="stylesheet" />
+    <link href="~/Content/detalle.css" rel="stylesheet" />
 
-    <header class="navbar">
-        <div class="navbar-grid">
-            <!-- Botón Sidebar -->
-            <div class="navbar-toggle">
-                <button id="sidebar-toggle" class="toggle-btn">☰</button>
-            </div>
-            <!-- Logo -->
-            <div class="navbar-logo">
-                <a href="@Url.Action("Index","Home")">🛒 Skart</a>
-            </div>
-            <!-- Links al centro -->
-            <nav class="navbar-links">
-                <a href="@Url.Action("Index","Home")">Home</a>
-                <a href="@Url.Action("Index","Producto")">Productos</a>
-                <a href="@Url.Action("Index","Servicios")">Servicios</a>
-                <a href="@Url.Action("Index","Acerca")">Acerca de</a>
-            </nav>
-            <!-- Acciones a la derecha -->
-            <div class="navbar-actions">
-                <a href="@Url.Action("Login","Usuario")">Inicio de Sesión</a>
-                <button id="theme-toggle">Tema</button>
+</head>
+<body>
+
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-brand">
+            <h2>Sistema Inventario</h2>
+            <span>ecommerce Burgos</span>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="@(controllerActual == "Orden" ? "active" : "")">
+                <a href="@Url.Action("Index","Orden")">
+                    🛒 <span>Ventas</span>
+                </a>
+            </li>
+            
+            </li>
+            <li class="@(controllerActual == "Producto" ? "active" : "")">
+                <a href="@Url.Action("Index","Producto")">📦 <span>Productos</span></a>
+            </li>
+            <li class="@(controllerActual == "Categoria" ? "active" : "")">
+                <a href="@Url.Action("Index","Categoria")">🏷 <span>Categorías</span></a>
+            </li>
+            <li class="@(controllerActual == "Proveedor" ? "active" : "")">
+                <a href="@Url.Action("Index","Proveedor")">🚚 <span>Proveedores</span></a>
+            </li>
+            <li class="@(controllerActual == "Usuario" ? "active" : "")">
+                <a href="@Url.Action("Index","Usuario")">👥 <span>Usuarios</span></a>
+            </li>
+        </ul>
+
+        <div class="sidebar-profile">
+            <div class="profile-icon">👤</div>
+            <div class="profile-info">
+                <span class="profile-name">Admin</span>
+                <span class="profile-role">Administrador</span>
             </div>
         </div>
-    </header>
-
-    <!-- Sidebar -->
-    <aside id="sidebar" class="sidebar">
-        <ul>
-            <li><a href="@Url.Action("Index","Dashboard")" title="Dashboard">📊 <span class="label">Dashboard</span></a></li>
-            <li>
-                <a href="#" title="Ventas">🛒 <span class="label">Ventas</span></a>
-                <ul class="submenu">
-                    <li><a href="@Url.Action("Index","Orden")" title="Ordenes">Ordenes</a></li>
-                    <li><a href="@Url.Action("Index","Carrito")" title="Carrito">Carrito</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#" title="Inventario">📦 <span class="label">Inventario</span></a>
-                <ul class="submenu">
-                    <li><a href="@Url.Action("Index","Producto")" title="Productos">Productos</a></li>
-                    <li><a href="@Url.Action("Index","Kardex")" title="Kardex">  📦 Kardex</a></li>
-                </ul>
-            </li>
-            <li><hr /></li>
-            <li><a href="@Url.Action("Index","Proveedor")" title="Proveedores">👤 <span class="label">Proveedores</span></a></li>
-            <li><a href="@Url.Action("Index","Categoria")" title="Categorías">🏷 <span class="label">Categorías</span></a></li>
-
-            <li>
-                <a href="@Url.Action("Index","Usuario")" title="Usuarios">👥 <span class="label">Usuarios</span></a>
-            </li>
-            <li>
-                <a href="@Url.Action("Index","Rol")" title="Roles">👥 <span class="label">Roles</span></a>
-            </li>
-
-
-
-        </ul>
     </aside>
 
-    <!-- Main Content -->
     <main class="content">
         @RenderBody()
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <nav>
-            <a href="@Url.Action("Index","Home")">Home</a>
-            <a href="@Url.Action("Index","Producto")">Productos</a>
-            <a href="@Url.Action("Index","Servicios")">Servicios</a>
-            <a href="@Url.Action("Index","Acerca")">Acerca de</a>
-        </nav>
-        <p>&copy; @DateTime.Now.Year - Skart</p>
-    </footer>
-
-
-    <!-- Scripts globales -->
-    <script src="@Url.Content("~/Scripts/theme.js")"></script>
-
     @RenderSection("Scripts", required: false)
-</body>
-</html>
-
 </body>
 </html>

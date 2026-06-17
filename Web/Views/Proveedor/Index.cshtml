@@ -4,53 +4,41 @@
     ViewBag.Title = "Proveedores";
 }
 
-<h2>Proveedores</h2>
+<div class="page-header">
+    <h1>Proveedores</h1>
+    <a href="@Url.Action("Crear")" class="btn-primary">＋ Nuevo Proveedor</a>
+</div>
 
-<p>
-    @Html.ActionLink(
-        "Nuevo Proveedor",
-        "Crear",
-        null,
-        new { @class = "btn btn-primary" })
-</p>
-
-<table class="table table-bordered">
-
-    
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Teléfono</th>
-            <th>Dirección</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="table-container">
+    <table class="custom-table">
+        <thead>
             <tr>
-                <td>@item.ProveedorId</td>
-                <td>@item.Nombre</td>
-                <td>@item.Email</td>
-                <td>@item.Telefono</td>
-                <td>@item.Direccion</td>
-
-                <td>
-                    @Html.ActionLink("Detalle", "Detalle",
-                        new { id = item.ProveedorId }) |
-
-                    @Html.ActionLink("Editar", "Editar",
-                        new { id = item.ProveedorId }) |
-
-                    @Html.ActionLink("Eliminar", "Eliminar",
-                        new { id = item.ProveedorId })
-                </td>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Acciones</th>
             </tr>
-        }
-    </tbody>
-    
-
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProveedorId</td>
+                    <td>@item.Nombre</td>
+                    <td>@item.Email</td>
+                    <td>@item.Telefono</td>
+                    <td>@item.Direccion</td>
+                    <td>
+                        <div class="table-actions">
+                            <a href="@Url.Action("Detalle", new { id = item.ProveedorId })" class="btn-table-edit" style="text-decoration: none;">🔍 Detalle</a>
+                            <a href="@Url.Action("Editar", new { id = item.ProveedorId })" class="btn-table-edit" style="text-decoration: none;">✏️ Editar</a>
+                            <a href="@Url.Action("Eliminar", new { id = item.ProveedorId })" class="btn-table-delete" style="text-decoration: none;">🗑️ Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

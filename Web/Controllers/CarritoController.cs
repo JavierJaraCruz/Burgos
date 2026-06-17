@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Web.Controllers
 {
+    [ValidarSesion]
     public class CarritoController : Controller
     {
         // GET: Carrito

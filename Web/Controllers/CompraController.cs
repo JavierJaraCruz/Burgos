@@ -5,6 +5,7 @@ using System.Web.Mvc;
 
 namespace Web.Controllers
 {
+    [ValidarSesion]
     public class CompraController : Controller
     {
         private readonly CompraService compraService = new CompraService();

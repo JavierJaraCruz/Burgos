@@ -4,49 +4,47 @@
     ViewBag.Title = "Productos";
 }
 
-<h2>Productos</h2>
+<div class="page-header">
+    <h1>Productos</h1>
+    <a href="@Url.Action("Crear")" class="btn-primary">＋ Nuevo Producto</a>
+</div>
 
-<p>
-    @Html.ActionLink("Nuevo Producto", "Crear", null, new { @class = "btn btn-primary" })
-</p>
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Imagen</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Categoría</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="table-container">
+    <table class="custom-table">
+        <thead>
             <tr>
-                <td>
-                    @if (!string.IsNullOrEmpty(item.ImagenUrl))
-                    {
-                        <img src="@item.ImagenUrl" width="80" />
-                    }
-                </td>
-                <td>@item.Nombre</td>
-                <td>S/. @item.Precio</td>
-                <td>@item.Stock</td>
-                <td>@item.CategoriaNombre</td>
-                <td>
-                    @Html.ActionLink("Detalle", "Detalle", new { id = item.ProductoId }) |
-                    @Html.ActionLink("Editar", "Editar", new { id = item.ProductoId }) |
-                    @Html.ActionLink("Eliminar", "Eliminar", new { id = item.ProductoId })
-                    @Html.ActionLink(
-                                    "Kardex",
-                                    "Index",
-                                    "Kardex",
-                                    new { productoId = item.ProductoId },
-                                    null)
-                </td>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Categoría</th>
+                <th>Acciones</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.ImagenUrl))
+                        {
+                            <img src="@item.ImagenUrl" width="60" style="border-radius: 4px; display: block;" />
+                        }
+                    </td>
+                    <td>@item.Nombre</td>
+                    <td>S/. @item.Precio</td>
+                    <td>@item.Stock</td>
+                    <td>@item.CategoriaNombre</td>
+                    <td>
+                        <div class="table-actions">
+                            <a href="@Url.Action("Detalle", new { id = item.ProductoId })" class="btn-table-edit" style="text-decoration: none;">🔍 Detalle</a>
+                            <a href="@Url.Action("Editar", new { id = item.ProductoId })" class="btn-table-edit" style="text-decoration: none;">✏️ Editar</a>
+                            <a href="@Url.Action("Index", "Kardex", new { productoId = item.ProductoId })" class="btn-table-edit" style="text-decoration: none;">📋 Kardex</a>
+                            <a href="@Url.Action("Eliminar", new { id = item.ProductoId })" class="btn-table-delete" style="text-decoration: none;">🗑️ Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

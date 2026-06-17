@@ -117,7 +117,7 @@ namespace DAL
         {
             using(SqlConnection conn = new SqlConnection(connectionString)) 
             {
-                string query = @"UPDATE Usuarios SET NombreUsuario=@Nom,Email=@Ema,PasswordHash=@Pass,Salt=@Sal
+                string query = @"UPDATE Usuarios SET NombreUsuario=@Nom,Email=@Ema,PasswordHash=@Pass,Salt=@Sal,
                                        FechaRegistro=@Fecha,Estado=@Estad WHERE UsuarioId=@Id";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@Nom", usuario.NombreUsuario);
@@ -143,5 +143,98 @@ namespace DAL
                 cmd.ExecuteNonQuery();
             }
         }
+        public Usuario ObtenerPorNombreUsuario(string nombreUsuario)
+        {
+            Usuario usuario = null;
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM Usuarios WHERE NombreUsuario = @nombreUsuario";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    usuario = new Usuario
+                    {
+                        UsuarioId = (int)reader["UsuarioId"],
+                        NombreUsuario = reader["NombreUsuario"].ToString(),
+                        Email = reader["Email"].ToString(),
+                        PasswordHash = reader["PasswordHash"].ToString(),
+                        Salt = reader["Salt"].ToString(),
+                        FechaRegistro = (DateTime)reader["FechaRegistro"],
+                        Estado = (bool)reader["Estado"]
+                    };
+                }
+            }
+            return usuario;
+        }
+
+        // Método para insertar en la tabla intermedia
+        public void AsignarRol(int usuarioId, int rolId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "INSERT INTO UsuarioRoles (UsuarioId, RolId) VALUES (@UsuarioId, @RolId)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@UsuarioId", usuarioId);
+                cmd.Parameters.AddWithValue("@RolId", rolId);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        // Método rápido para listar los roles en el formulario (puedes crear un RolDAL propio luego si prefieres)
+        public List<Rol> ListarRoles()
+        {
+            var lista = new List<Rol>();
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM Roles";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    lista.Add(new Rol
+                    {
+                        RolId = (int)reader["RolId"],
+                        NombreRol = reader["NombreRol"].ToString() 
+                    });
+                }
+            }
+            return lista;
+        }
+        public string ObtenerNombreRolPorUsuario(int usuarioId)
+        {
+            string nombreRol = null;
+
+            
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                
+                string query = @"SELECT r.NombreRol 
+                         FROM Roles r 
+                         INNER JOIN UsuarioRoles ur ON r.RolId = ur.RolId 
+                         WHERE ur.UsuarioId = @UsuarioId";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@UsuarioId", usuarioId);
+
+                conn.Open();
+                object resultado = cmd.ExecuteScalar();
+
+                if (resultado != null && resultado != DBNull.Value)
+                {
+                    nombreRol = resultado.ToString();
+                }
+            }
+
+            return nombreRol;
+        }
+
     }
 }

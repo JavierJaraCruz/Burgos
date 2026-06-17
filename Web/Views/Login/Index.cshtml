@@ -1,0 +1,48 @@
+﻿@model Web.ViewModels.LoginViewModel
+@{
+    Layout = null; // No utiliza la barra lateral ni el layout general
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Iniciar Sesión - Skart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="~/Content/login.css" rel="stylesheet" />
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <div class="login-card">
+            <h2>Login</h2>
+            <span>Ingresa tus credenciales para continuar</span>
+
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                @* Muestra los errores globales enviados desde el Controller *@
+                if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="validation-summary-errors text-danger" style="margin-bottom: 15px; text-align: left;">
+                        @Html.ValidationSummary(true, "")
+                    </div>
+                }
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.NombreUsuario)
+                    @Html.TextBoxFor(m => m.NombreUsuario, new { @class = "form-input", placeholder = "Ej. admin", autocomplete = "off" })
+                    @Html.ValidationMessageFor(m => m.NombreUsuario, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-input", placeholder = "••••••••" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <button type="submit" class="btn-login">Iniciar Sesión</button>
+            }
+        </div>
+    </div>
+</body>
+</html>

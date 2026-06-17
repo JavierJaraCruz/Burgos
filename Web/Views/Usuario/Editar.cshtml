@@ -26,8 +26,8 @@
         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Estado)
+    <div class="form-group" style="margin-top: 15px; margin-bottom: 15px;">
+        @Html.LabelFor(m => m.Estado, new { @style = "margin-right: 10px;" })
         @Html.CheckBoxFor(m => m.Estado)
     </div>
 
@@ -42,9 +42,10 @@
 
 @section Scripts {
     <script>
-    document.getElementById("editForm").addEventListener("submit", function (e) {
+        document.getElementById("editForm").addEventListener("submit", function (e) {
             if (!confirm("¿Desea actualizar este usuario?")) {
                 e.preventDefault();
             }
-        });</script>
+        });
+    </script>
 }

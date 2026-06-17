@@ -44,6 +44,7 @@
     <Compile Include="CarritoService.cs" />
     <Compile Include="CategoriaService.cs" />
     <Compile Include="CompraService.cs" />
+    <Compile Include="DashboardService.cs" />
     <Compile Include="InventarioService.cs" />
     <Compile Include="KardexService.cs" />
     <Compile Include="OrdenService.cs" />

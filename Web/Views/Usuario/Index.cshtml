@@ -5,14 +5,12 @@
 }
 
 <div class="page-header">
-    <h2>Usuarios</h2>
-    <p>
-        @Html.ActionLink("➕ Crear Nuevo", "Crear", null, new { @class = "btn btn-primary" })
-    </p>
+    <h1>Usuarios</h1>
+    <a href="@Url.Action("Crear")" class="btn-primary" style="text-decoration: none;">＋ Crear Nuevo</a>
 </div>
 
 <div class="table-container">
-    <table id="usuariosTable" class="styled-table">
+    <table id="usuariosTable" class="custom-table">
         <thead>
             <tr>
                 <th>Nombre Usuario</th>
@@ -29,9 +27,11 @@
                     <td>@u.Email</td>
                     <td>@(u.Estado ? "Activo" : "Inactivo")</td>
                     <td>
-                        @Html.ActionLink("✏️ Editar", "Editar", new { id = u.UsuarioId }, new { @class = "btn btn-warning btn-sm" })
-                        @Html.ActionLink("🔍 Detalle", "Detalle", new { id = u.UsuarioId }, new { @class = "btn btn-info btn-sm" })
-                        @Html.ActionLink("🗑 Eliminar", "Delete", new { id = u.UsuarioId }, new { @class = "btn btn-danger btn-sm" })
+                        <div class="table-actions">
+                            <a href="@Url.Action("Detalle", new { id = u.UsuarioId })" class="btn-table-edit" style="text-decoration: none;">🔍 Detalle</a>
+                            <a href="@Url.Action("Editar", new { id = u.UsuarioId })" class="btn-table-edit" style="text-decoration: none;">✏️ Editar</a>
+                            <a href="@Url.Action("Delete", new { id = u.UsuarioId })" class="btn-table-delete" style="text-decoration: none;">🗑️ Eliminar</a>
+                        </div>
                     </td>
                 </tr>
             }
@@ -39,17 +39,16 @@
     </table>
 </div>
 
-<div class="actions-bar">
-    <button id="clearSearch" class="btn btn-secondary">🧹 Borrar búsqueda</button>
-</div>
+<button id="clearSearch" class="btn-primary" style="background-color: #64748b; margin-top: 20px;">🧹 Borrar búsqueda</button>
 
 @section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
     <script>
-    $(document).ready(function () {
+        $(document).ready(function () {
             var table = $('#usuariosTable').DataTable({
                 paging: true,
                 pageLength: 10,
@@ -72,5 +71,6 @@
             $('#clearSearch').on('click', function () {
                 table.search('').draw();
             });
-        });</script>
+        });
+    </script>
 }

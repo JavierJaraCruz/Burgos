@@ -4,44 +4,37 @@
     ViewBag.Title = "Categorías";
 }
 
-<h2>Categorías</h2>
+<div class="page-header">
+    <h1>Categorías</h1>
+    <a href="@Url.Action("Crear")" class="btn-primary">＋ Nueva Categoría</a>
+</div>
 
-<p>
-    @Html.ActionLink("Nueva Categoría", "Crear", null,
-        new { @class = "btn btn-primary" })
-</p>
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="table-container">
+    <table class="custom-table">
+        <thead>
             <tr>
-                <td>@item.CategoriaId</td>
-                <td>@item.Nombre</td>
-                <td>@item.Descripcion</td>
-
-                <td>
-                    @Html.ActionLink("Detalle", "Detalle",
-                        new { id = item.CategoriaId }) |
-
-                    @Html.ActionLink("Editar", "Editar",
-                        new { id = item.CategoriaId }) |
-
-                    @Html.ActionLink("Eliminar", "Eliminar",
-                        new { id = item.CategoriaId })
-                </td>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
             </tr>
-        }
-    </tbody>
-   
-
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CategoriaId</td>
+                    <td>@item.Nombre</td>
+                    <td>@item.Descripcion</td>
+                    <td>
+                        <div class="table-actions">
+                            <a href="@Url.Action("Detalle", new { id = item.CategoriaId })" class="btn-table-edit" style="text-decoration: none;">🔍 Detalle</a>
+                            <a href="@Url.Action("Editar", new { id = item.CategoriaId })" class="btn-table-edit" style="text-decoration: none;">✏️ Editar</a>
+                            <a href="@Url.Action("Eliminar", new { id = item.CategoriaId })" class="btn-table-delete" style="text-decoration: none;">🗑️ Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

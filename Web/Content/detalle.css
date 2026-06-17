@@ -1,0 +1,106 @@
+﻿
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    padding: 35px;
+    width: 100%;
+    /* El max-width:600px ya viene definido en tu HTML inline */
+}
+
+/* Ajuste del título h2 para que combine con tus otros Index */
+h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 24px;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+
+.card img {
+    display: block;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    background-color: #f8fafc;
+    object-fit: cover;
+}
+
+
+.dl-horizontal {
+    display: grid;
+    grid-template-columns: 140px 1fr; /* Columna fija para etiquetas, el resto para datos */
+    gap: 16px 24px; /* Espaciado vertical y horizontal entre filas */
+    margin-bottom: 30px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 20px;
+}
+
+    /* Etiquetas (ID, Nombre, Precio, etc.) */
+    .dl-horizontal dt {
+        font-size: 11px;
+        font-weight: 600;
+        color: #64748b; /* Mismo color de las cabeceras de tus tablas */
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        display: flex;
+        align-items: center; /* Centrado sutil por si el dato ocupa dos líneas */
+    }
+
+    /* Valores o Datos del Modelo */
+    .dl-horizontal dd {
+        font-size: 14px;
+        color: #334155; /* Mismo tono de letra que el cuerpo de tus tablas */
+        font-weight: 500;
+        margin: 0; /* Resetea el margen que trae la etiqueta por defecto */
+        word-break: break-word; /* Evita que descripciones largas rompan el diseño */
+    }
+
+
+.card p {
+    display: flex;
+    gap: 12px;
+    margin: 0;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 20px;
+}
+
+/* Estructura base de botones */
+.btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+/* Botón Editar (Amber/Naranja corporativo en armonía con tu icon-orange) */
+.btn-warning {
+    background-color: #f59e0b;
+    color: #ffffff;
+    border: none;
+}
+
+    .btn-warning:hover {
+        background-color: #d97706; /* El mismo tono oscuro de tus alertas */
+    }
+
+/* Botón Volver / Secundario */
+.btn-secondary {
+    background-color: #ffffff;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+}
+
+    .btn-secondary:hover {
+        background-color: #f8fafc;
+        border-color: #94a3b8;
+        color: #1e293b;
+    }

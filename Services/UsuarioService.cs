@@ -21,5 +21,17 @@ namespace Services
         public void ActualizarUsuario(Usuario u) => usuarioDAL.Actualizar(u);
 
         public void EliminarUsuario(int id) => usuarioDAL.Eliminar(id);
+
+        public Usuario ObtenerUsuarioPorNombre(string nombreUsuario) => usuarioDAL.ObtenerPorNombreUsuario(nombreUsuario);
+
+        public void AsignarRolAUsuario(int usuarioId, int rolId) => usuarioDAL.AsignarRol(usuarioId, rolId);
+
+        public string ObtenerNombreRolPorUsuario(int usuarioId)
+        {
+     
+            return usuarioDAL.ObtenerNombreRolPorUsuario(usuarioId);
+        }
+
+        public List<Rol> ListarRoles() => usuarioDAL.ListarRoles();
     }
 }

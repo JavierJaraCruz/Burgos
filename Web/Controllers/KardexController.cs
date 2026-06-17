@@ -5,6 +5,7 @@ using Web.ViewModels;
 
 namespace Web.Controllers
 {
+    [ValidarSesion]
     public class KardexController : Controller
     {
         private readonly KardexService kardexService =

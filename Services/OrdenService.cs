@@ -17,5 +17,10 @@ namespace Services
 
         public List<Orden> ListarOrdenes() => ordenDAL.ListarOrdenes();
 
+        public Orden ObtenerPorId(int id)
+        {
+            return ordenDAL.ObtenerPorId(id);
+        }
+
     }
 }

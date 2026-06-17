@@ -5,37 +5,41 @@
 }
 
 <div class="page-header">
-    <h2>Roles</h2>
-    <p>@Html.ActionLink("➕ Crear Nuevo", "Crear", null, new { @class = "btn btn-primary" })</p>
+    <h1>Roles</h1>
+    <a href="@Url.Action("Crear")" class="btn-primary">＋ Crear Nuevo</a>
 </div>
 
-<table id="rolesTable" class="styled-table">
-    <thead>
-        <tr>
-            <th>Nombre Rol</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var r in Model)
-        {
+<div class="table-container">
+    <table id="rolesTable" class="custom-table">
+        <thead>
             <tr>
-                <td>@r.NombreRol</td>
-                <td>
-                    @Html.ActionLink("✏️ Editar", "Editar", new { id = r.RolId }, new { @class = "btn btn-warning btn-sm" })
-                    @Html.ActionLink("🔍 Detalle", "Detalle", new { id = r.RolId }, new { @class = "btn btn-info btn-sm" })
-                    @Html.ActionLink("🗑 Eliminar", "Eliminar", new { id = r.RolId }, new { @class = "btn btn-danger btn-sm" })
-                </td>
+                <th>Nombre Rol</th>
+                <th>Acciones</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td>@r.NombreRol</td>
+                    <td>
+                        <div class="table-actions">
+                            <a href="@Url.Action("Detalle", new { id = r.RolId })" class="btn-table-edit" style="text-decoration: none;">🔍 Detalle</a>
+                            <a href="@Url.Action("Editar", new { id = r.RolId })" class="btn-table-edit" style="text-decoration: none;">✏️ Editar</a>
+                            <a href="@Url.Action("Eliminar", new { id = r.RolId })" class="btn-table-delete" style="text-decoration: none;">🗑️ Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-<button id="clearSearchRoles" class="btn btn-secondary">🧹 Borrar búsqueda</button>
+<button id="clearSearchRoles" class="btn-primary" style="background-color: #64748b; margin-top: 20px;">🧹 Borrar búsqueda</button>
 
 @section Scripts {
     <script>
-    $(document).ready(function () {
+        $(document).ready(function () {
             var table = $('#rolesTable').DataTable({
                 paging: true,
                 pageLength: 10,
@@ -45,5 +49,6 @@
                 language: { search: "🔎 Buscar:" }
             });
             $('#clearSearchRoles').on('click', function () { table.search('').draw(); });
-        });</script>
+        });
+    </script>
 }

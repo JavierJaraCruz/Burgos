@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Web.ViewModels.OrdenViewModel>
+
+<h2>Órdenes</h2>
+
+<p>
+    @Html.ActionLink("Nueva Orden", "Crear", null,
+        new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.OrdenId</td>
+                <td>@item.UsuarioId</td>
+                <td>@item.FechaOrden.ToShortDateString()</td>
+                <td>@item.Total</td>
+                <td>@item.Estado</td>
+                <td>
+                    @Html.ActionLink(
+                        "Detalle",
+                        "Detalle",
+                        new { id = item.OrdenId },
+                        new { @class = "btn btn-info btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -16,4 +16,8 @@ using System.Web;
         public string Email { get; set; }
 
         public bool Estado { get; set; }
+
+        [Required(ErrorMessage = "Debe seleccionar un rol para el usuario")]
+        [Display(Name = "Rol asignado")]
+        public int RolId { get; set; }
 }

@@ -6,6 +6,7 @@ using Web.ViewModels;
 
 namespace Web.Controllers
 {
+    [ValidarSesion]
     public class CategoriaController : Controller
     {
         private readonly CategoriaService categoriaService = new CategoriaService();

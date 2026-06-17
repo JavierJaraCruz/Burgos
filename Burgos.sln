@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entiti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{63FF7DF1-A8E5-4EBF-A915-F667F5AA3D45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Burgos.API", "Burgos.API\Burgos.API.csproj", "{AFBEAFDC-7062-4DAC-895D-73543CE39E4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{63FF7DF1-A8E5-4EBF-A915-F667F5AA3D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63FF7DF1-A8E5-4EBF-A915-F667F5AA3D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63FF7DF1-A8E5-4EBF-A915-F667F5AA3D45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFBEAFDC-7062-4DAC-895D-73543CE39E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFBEAFDC-7062-4DAC-895D-73543CE39E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFBEAFDC-7062-4DAC-895D-73543CE39E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFBEAFDC-7062-4DAC-895D-73543CE39E4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

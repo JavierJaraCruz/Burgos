@@ -29,5 +29,7 @@ namespace Entities
 
         public bool Estado { get; set; }
 
+
+
     }
 }

@@ -35,7 +35,8 @@ namespace DAL
                         c.Nombre AS CategoriaNombre
                     FROM Productos p
                     INNER JOIN Categorias c
-                        ON p.CategoriaId = c.CategoriaId";
+                        ON p.CategoriaId = c.CategoriaId
+                    WHERE p.Activo = 1";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -94,7 +95,8 @@ namespace DAL
                     FROM Productos
                     INNER JOIN Categorias
                         ON Productos.CategoriaId = Categorias.CategoriaId
-                    WHERE Productos.ProductoId = @id";
+                    WHERE Productos.ProductoId = @id
+                      AND Productos.Activo = 1";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -300,7 +302,7 @@ namespace DAL
 
             {
 
-                string query = "DELETE FROM Productos WHERE ProductoId=@Id";
+                string query = "UPDATE Productos SET Activo = 0 WHERE ProductoId = @Id";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
 
