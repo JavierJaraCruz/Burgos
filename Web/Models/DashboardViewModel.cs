@@ -11,7 +11,6 @@ namespace Web.ViewModels
         public decimal TotalVentasMonto { get; set; }
         public string MensajeEstado { get; set; }
 
-        // opcional: si quieres traer el entity completo
         public Dashboard Datos { get; set; }
     }
 }

@@ -9,7 +9,7 @@
     
 }
 
-/* Ajuste del título h2 para que combine con tus otros Index */
+
 h2 {
     margin-top: 0;
     margin-bottom: 25px;
@@ -31,14 +31,13 @@ h2 {
 
 .dl-horizontal {
     display: grid;
-    grid-template-columns: 140px 1fr; /* Columna fija para etiquetas, el resto para datos */
-    gap: 16px 24px; /* Espaciado vertical y horizontal entre filas */
+    grid-template-columns: 140px 1fr; 
+    gap: 16px 24px; 
     margin-bottom: 30px;
     border-top: 1px solid #f1f5f9;
     padding-top: 20px;
 }
 
-    /* Etiquetas (ID, Nombre, Precio, etc.) */
     .dl-horizontal dt {
         font-size: 11px;
         font-weight: 600;
@@ -46,16 +45,16 @@ h2 {
         text-transform: uppercase;
         letter-spacing: 0.05em;
         display: flex;
-        align-items: center; /* Centrado sutil por si el dato ocupa dos líneas */
+        align-items: center; 
     }
 
-    /* Valores o Datos del Modelo */
+    
     .dl-horizontal dd {
         font-size: 14px;
-        color: #334155; /* Mismo tono de letra que el cuerpo de tus tablas */
+        color: #334155; 
         font-weight: 500;
-        margin: 0; /* Resetea el margen que trae la etiqueta por defecto */
-        word-break: break-word; /* Evita que descripciones largas rompan el diseño */
+        margin: 0; 
+        word-break: break-word; 
     }
 
 
@@ -67,7 +66,6 @@ h2 {
     padding-top: 20px;
 }
 
-/* Estructura base de botones */
 .btn {
     padding: 10px 20px;
     border-radius: 6px;
@@ -89,10 +87,10 @@ h2 {
 }
 
     .btn-warning:hover {
-        background-color: #d97706; /* El mismo tono oscuro de tus alertas */
+        background-color: #d97706;
     }
 
-/* Botón Volver / Secundario */
+
 .btn-secondary {
     background-color: #ffffff;
     color: #475569;

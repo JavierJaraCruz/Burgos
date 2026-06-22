@@ -6,11 +6,11 @@ form {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 	border: 1px solid #e2e8f0;
 	padding: 30px;
-	max-width: 680px; /* Limita el ancho para que no se estire en pantallas grandes */
+	max-width: 680px;
 	width: 100%;
 }
 
-/* Ajuste para el h2 dentro del page-header corporativo */
+
 .page-header h2 {
 	margin: 0;
 	font-size: 24px;
@@ -20,12 +20,11 @@ form {
 
 
 .form-group {
-	margin-bottom: 28px; /* Aumentado (antes 20px) para separar más cada bloque entre sí */
+	margin-bottom: 28px; 
 	display: flex;
 	flex-direction: column;
 }
 
-	/* Etiquetas (Labels) */
 	.form-group label {
 		font-size: 13px;
 		font-weight: 600;
@@ -35,10 +34,10 @@ form {
 		letter-spacing: 0.03em;
 	}
 
-/* Cajas de texto, Email y Selects (Drop-down) */
+
 .form-control {
 	width: 100%;
-	padding: 13px 16px; /* Aumentado el espacio interno para que el texto no esté apretado */
+	padding: 13px 16px; 
 	font-size: 14px;
 	color: #334155;
 	background-color: #ffffff;
@@ -46,22 +45,21 @@ form {
 	border-radius: 6px;
 	outline: none;
 	transition: border-color 0.2s, box-shadow 0.2s;
-	margin-bottom: 6px; /*  NUEVO: Empuja el mensaje de validación de abajo para que no se pegue */
+	margin-bottom: 6px;
 }
 
-	/* Efecto Focus en armonía con tu Azul Primary */
+	
 	.form-control:focus {
 		border-color: #0066cc;
 		box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
 	}
 
-	/* Placeholder sutil */
 	.form-control::placeholder {
 		color: #94a3b8;
 	}
 
 
-/* Manejo especial para el contenedor del Estado */
+
 .form-group[style*="display"],
 .form-group:has(input[type="checkbox"]) {
 	flex-direction: row !important;
@@ -72,7 +70,7 @@ form {
 input[type="checkbox"] {
 	width: 16px;
 	height: 16px;
-	accent-color: #0066cc; /* Check azul por defecto del navegador */
+	accent-color: #0066cc; 
 	cursor: pointer;
 }
 
@@ -91,12 +89,12 @@ input[type="checkbox"] {
 	transition: background 0.2s, border-color 0.2s;
 }
 
-/* Botón Cancelar / Secundario */
+
 .btn-secondary {
 	background-color: #ffffff;
 	color: #475569;
 	border: 1px solid #cbd5e1;
-	margin-left: 8px; /* Separación del botón Guardar */
+	margin-left: 8px; 
 }
 
 	.btn-secondary:hover {
@@ -106,10 +104,10 @@ input[type="checkbox"] {
 	}
 
 
-/* Mensajes de error debajo de los inputs */
+
 .text-danger,
 .field-validation-error {
-	color: #ef4444; /* Mismo rojo que el hover de eliminar */
+	color: #ef4444; 
 	font-size: 13px;
 	margin-top: 6px;
 	font-weight: 500;
@@ -131,7 +129,6 @@ input[type="checkbox"] {
 		margin: 0;
 	}
 
-/* Banner temporal de guardado exitoso */
 .message-banner {
 	background-color: #dcfce7; 
 	color: #16a34a; 

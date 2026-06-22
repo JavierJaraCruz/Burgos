@@ -6,7 +6,7 @@
 	font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
-/* Cuerpo de la página: Centrado absoluto con fondo azul profundo */
+
 .login-body {
 	background: linear-gradient(135deg, #141b2d 0%, #0b0f19 100%);
 	height: 100vh;
@@ -43,7 +43,7 @@
 	.login-card span {
 		display: block;
 		font-size: 0.9rem;
-		color: #94a3b8; /* Gris azulado suave */
+		color: #94a3b8; 
 		margin-bottom: 30px;
 	}
 
@@ -53,7 +53,7 @@
 	text-align: left;
 }
 
-	/* Etiquetas de texto */
+
 	.form-group label {
 		display: block;
 		font-size: 0.85rem;
@@ -62,11 +62,11 @@
 		font-weight: 500;
 	}
 
-/* Cajas de texto y contraseña */
+
 .form-input {
 	width: 100%;
 	padding: 13px 16px;
-	background-color: #111827; /* Fondo oscuro puro para contraste */
+	background-color: #111827; 
 	border: 1px solid #374151;
 	border-radius: 8px;
 	color: #ffffff;
@@ -75,14 +75,14 @@
 	transition: all 0.25s ease;
 }
 
-	/* Efecto azul brillante al hacer clic en el input */
+
 	.form-input:focus {
-		border-color: #3b82f6; /* Azul Tech */
+		border-color: #3b82f6; 
 		background-color: #151f32;
 		box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
 	}
 
-	/* Color del marcador de posición (Placeholder) */
+
 	.form-input::placeholder {
 		color: #4b5563;
 	}
