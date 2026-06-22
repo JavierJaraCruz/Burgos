@@ -82,14 +82,26 @@ namespace DAL
                 SqlTransaction tx = conn.BeginTransaction();
                 try
                 {
-                    string query = @"INSERT INTO CarritoDetalle (CarritoId,ProductoId,Cantidad,PrecioUnitario,Subtotal)
-                             VALUES (@CarritoId,@ProductoId,@Cantidad,@Precio,@Subtotal)";
+                    string query = @"INSERT INTO CarritoDetalle
+                            (
+                                CarritoId,
+                                ProductoId,
+                                Cantidad,
+                                PrecioUnitario
+                            )
+                            VALUES
+                            (
+                                @CarritoId,
+                                @ProductoId,
+                                @Cantidad,
+                                @Precio
+                            )";
                     SqlCommand cmd = new SqlCommand(query, conn, tx);
                     cmd.Parameters.AddWithValue("@CarritoId", carritoId);
                     cmd.Parameters.AddWithValue("@ProductoId", productoId);
                     cmd.Parameters.AddWithValue("@Cantidad", cantidad);
                     cmd.Parameters.AddWithValue("@Precio", precioUnitario);
-                    cmd.Parameters.AddWithValue("@Subtotal", cantidad * precioUnitario);
+                   
                     cmd.ExecuteNonQuery();
 
                     tx.Commit();
@@ -136,6 +148,39 @@ namespace DAL
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
+        }
+        public List<CarritoDetalle> ObtenerDetalles(int carritoId)
+        {
+            List<CarritoDetalle> lista = new List<CarritoDetalle>();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"SELECT *
+                         FROM CarritoDetalle
+                         WHERE CarritoId = @CarritoId";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@CarritoId", carritoId);
+
+                conn.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    lista.Add(new CarritoDetalle
+                    {
+                        CarritoDetalleId = (int)reader["CarritoDetalleId"],
+                        CarritoId = (int)reader["CarritoId"],
+                        ProductoId = (int)reader["ProductoId"],
+                        Cantidad = (int)reader["Cantidad"],
+                        PrecioUnitario = (decimal)reader["PrecioUnitario"],
+                        Subtotal = (decimal)reader["Subtotal"]
+                    });
+                }
+            }
+
+            return lista;
         }
     }
 }

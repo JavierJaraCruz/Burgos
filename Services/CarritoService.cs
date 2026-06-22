@@ -31,5 +31,11 @@ namespace Services
             => carritoDAL.EliminarProducto(detalleId);
 
         public void EliminarCarrito(int id) => carritoDAL.Eliminar(id);
+
+        public List<CarritoDetalle> ObtenerDetalles(int carritoId)
+    => carritoDAL.ObtenerDetalles(carritoId);
+
+        public void VaciarCarrito(int carritoId)
+    => carritoDAL.VaciarCarrito(carritoId);
     }
 }

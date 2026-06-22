@@ -25,7 +25,7 @@
         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
     </div>
 
-    @* NUEVO: Campo de Selección de Rol *@
+   
     <div class="form-group">
         <label for="RolId">Rol Asignado</label>
         @Html.DropDownListFor(m => m.RolId, (SelectList)ViewBag.Roles, "-- Seleccione un Rol --", new { @class = "form-control" })

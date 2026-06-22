@@ -20,7 +20,7 @@ form {
 
 
 .form-group {
-	margin-bottom: 28px; /* 🌟 Aumentado (antes 20px) para separar más cada bloque entre sí */
+	margin-bottom: 28px; /* Aumentado (antes 20px) para separar más cada bloque entre sí */
 	display: flex;
 	flex-direction: column;
 }
@@ -29,7 +29,7 @@ form {
 	.form-group label {
 		font-size: 13px;
 		font-weight: 600;
-		color: #64748b; /* Mismo color de las cabeceras de tus tablas */
+		color: #64748b;
 		margin-bottom: 8px;
 		text-transform: uppercase;
 		letter-spacing: 0.03em;
@@ -38,7 +38,7 @@ form {
 /* Cajas de texto, Email y Selects (Drop-down) */
 .form-control {
 	width: 100%;
-	padding: 13px 16px; /* 🌟 Aumentado el espacio interno para que el texto no esté apretado */
+	padding: 13px 16px; /* Aumentado el espacio interno para que el texto no esté apretado */
 	font-size: 14px;
 	color: #334155;
 	background-color: #ffffff;
@@ -46,7 +46,7 @@ form {
 	border-radius: 6px;
 	outline: none;
 	transition: border-color 0.2s, box-shadow 0.2s;
-	margin-bottom: 6px; /* 🌟 NUEVO: Empuja el mensaje de validación de abajo para que no se pegue */
+	margin-bottom: 6px; /*  NUEVO: Empuja el mensaje de validación de abajo para que no se pegue */
 }
 
 	/* Efecto Focus en armonía con tu Azul Primary */
@@ -77,7 +77,7 @@ input[type="checkbox"] {
 }
 
 
-/* El .btn-primary ya lo tienes configurado, agregamos herencia por si acaso */
+
 .btn {
 	padding: 10px 20px;
 	border-radius: 6px;
@@ -115,7 +115,7 @@ input[type="checkbox"] {
 	font-weight: 500;
 }
 
-/* Resumen superior de errores */
+
 .validation-summary-errors {
 	background-color: #fef2f2;
 	border: 1px solid #fee2e2;
@@ -133,8 +133,8 @@ input[type="checkbox"] {
 
 /* Banner temporal de guardado exitoso */
 .message-banner {
-	background-color: #dcfce7; /* Mismo color que tu icon-green background */
-	color: #16a34a; /* Mismo color que tu icon-green */
+	background-color: #dcfce7; 
+	color: #16a34a; 
 	border: 1px solid #bbf7d0;
 	padding: 12px 16px;
 	border-radius: 6px;

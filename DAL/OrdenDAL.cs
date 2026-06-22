@@ -65,34 +65,100 @@ namespace DAL
         public int InsertarOrden(int usuarioId, List<OrdenDetalle> detalles)
         {
             int ordenId;
+
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
+
                 SqlTransaction tx = conn.BeginTransaction();
 
                 try
                 {
-                    string queryOrden = @"INSERT INTO Ordenes (UsuarioId,FechaOrden,Total,Estado)
-                                          VALUES (@UsuarioId,GETDATE(),@Total,'Confirmada');
-                                          SELECT SCOPE_IDENTITY();";
                     decimal total = 0;
-                    foreach (var d in detalles) total += d.Subtotal;
-
-                    SqlCommand cmdOrden = new SqlCommand(queryOrden, conn, tx);
-                    cmdOrden.Parameters.AddWithValue("@UsuarioId", usuarioId);
-                    cmdOrden.Parameters.AddWithValue("@Total", total);
-                    ordenId = Convert.ToInt32(cmdOrden.ExecuteScalar());
 
                     foreach (var d in detalles)
                     {
-                        string queryDetalle = @"INSERT INTO OrdenDetalle (OrdenId,ProductoId,Cantidad,PrecioUnitario,Subtotal)
-                                                VALUES (@OrdenId,@Prod,@Cant,@Precio,@Subtotal)";
-                        SqlCommand cmdDet = new SqlCommand(queryDetalle, conn, tx);
-                        cmdDet.Parameters.AddWithValue("@OrdenId", ordenId);
-                        cmdDet.Parameters.AddWithValue("@Prod", d.ProductoId);
-                        cmdDet.Parameters.AddWithValue("@Cant", d.Cantidad);
-                        cmdDet.Parameters.AddWithValue("@Precio", d.PrecioUnitario);
-                        cmdDet.Parameters.AddWithValue("@Subtotal", d.Subtotal);
+                        total += d.Subtotal;
+                    }
+
+                    string queryOrden = @"
+                INSERT INTO Ordenes
+                (
+                    UsuarioId,
+                    FechaOrden,
+                    Total,
+                    Estado
+                )
+                VALUES
+                (
+                    @UsuarioId,
+                    GETDATE(),
+                    @Total,
+                    'Confirmada'
+                );
+
+                SELECT SCOPE_IDENTITY();
+            ";
+
+                    SqlCommand cmdOrden =
+                        new SqlCommand(queryOrden, conn, tx);
+
+                    cmdOrden.Parameters.AddWithValue(
+                        "@UsuarioId",
+                        usuarioId
+                    );
+
+                    cmdOrden.Parameters.AddWithValue(
+                        "@Total",
+                        total
+                    );
+
+                    ordenId =
+                        Convert.ToInt32(
+                            cmdOrden.ExecuteScalar()
+                        );
+
+                    foreach (var d in detalles)
+                    {
+                        string queryDetalle = @"
+                    INSERT INTO OrdenDetalle
+                    (
+                        OrdenId,
+                        ProductoId,
+                        Cantidad,
+                        PrecioUnitario
+                    )
+                    VALUES
+                    (
+                        @OrdenId,
+                        @Prod,
+                        @Cant,
+                        @Precio
+                    )";
+
+                        SqlCommand cmdDet =
+                            new SqlCommand(queryDetalle, conn, tx);
+
+                        cmdDet.Parameters.AddWithValue(
+                            "@OrdenId",
+                            ordenId
+                        );
+
+                        cmdDet.Parameters.AddWithValue(
+                            "@Prod",
+                            d.ProductoId
+                        );
+
+                        cmdDet.Parameters.AddWithValue(
+                            "@Cant",
+                            d.Cantidad
+                        );
+
+                        cmdDet.Parameters.AddWithValue(
+                            "@Precio",
+                            d.PrecioUnitario
+                        );
+
                         cmdDet.ExecuteNonQuery();
                     }
 
@@ -104,6 +170,7 @@ namespace DAL
                     throw;
                 }
             }
+
             return ordenId;
         }
 

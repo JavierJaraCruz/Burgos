@@ -6,7 +6,7 @@
     border: 1px solid #e2e8f0;
     padding: 35px;
     width: 100%;
-    /* El max-width:600px ya viene definido en tu HTML inline */
+    
 }
 
 /* Ajuste del título h2 para que combine con tus otros Index */
@@ -42,7 +42,7 @@ h2 {
     .dl-horizontal dt {
         font-size: 11px;
         font-weight: 600;
-        color: #64748b; /* Mismo color de las cabeceras de tus tablas */
+        color: #64748b; 
         text-transform: uppercase;
         letter-spacing: 0.05em;
         display: flex;
@@ -81,7 +81,7 @@ h2 {
     transition: background 0.2s, border-color 0.2s;
 }
 
-/* Botón Editar (Amber/Naranja corporativo en armonía con tu icon-orange) */
+
 .btn-warning {
     background-color: #f59e0b;
     color: #ffffff;

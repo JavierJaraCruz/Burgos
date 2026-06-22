@@ -13,7 +13,7 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(); // Busca Views/Login/Index.cshtml (Todo bien aquí)
+            return View(); 
         }
 
         [HttpPost]
@@ -22,12 +22,12 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                // 1. Buscamos al usuario por su nombre
+                
                 var usuario = usuarioService.ObtenerUsuarioPorNombre(model.NombreUsuario);
 
                 if (usuario != null)
                 {
-                    // 2. Validamos la contraseña usando tu PasswordHelper
+                   
                     var hashIntento = PasswordHelper.GenerarPasswordHash(model.Password, usuario.Salt);
 
                     if (usuario.PasswordHash == hashIntento)
@@ -35,19 +35,19 @@ namespace Web.Controllers
                         if (!usuario.Estado)
                         {
                             ModelState.AddModelError("", "Tu cuenta se encuentra inactiva. Contacta al administrador.");
-                            return View("Index", model); // 👈 CORREGIDO: Fuerza a usar la vista "Index"
+                            return View("Index", model); 
                         }
 
-                        // 3. Validamos el Rol del usuario
+                        
                         string nombreRol = usuarioService.ObtenerNombreRolPorUsuario(usuario.UsuarioId);
 
                         if (nombreRol != "Administrador" && nombreRol != "Admin")
                         {
                             ModelState.AddModelError("", "Acceso denegado: Solo los usuarios con rol Administrador pueden ingresar al sistema.");
-                            return View("Index", model); // 👈 CORREGIDO: Fuerza a usar la vista "Index"
+                            return View("Index", model); 
                         }
 
-                        // 4. Creamos la sesión
+                     
                         Session["UsuarioId"] = usuario.UsuarioId;
                         Session["NombreUsuario"] = usuario.NombreUsuario;
                         Session["Rol"] = nombreRol;
@@ -56,11 +56,11 @@ namespace Web.Controllers
                     }
                 }
 
-                // Error si las credenciales no coinciden
+                
                 ModelState.AddModelError("", "Usuario o contraseña incorrectos.");
             }
 
-            // 👈 CORREGIDO: Si el ModelState no es válido o falló el login, regresa a la vista "Index"
+           
             return View("Index", model);
         }
 

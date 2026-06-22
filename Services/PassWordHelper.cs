@@ -15,7 +15,7 @@ namespace Services
             return Convert.ToBase64String(saltBytes);
         }
 
-        // Genera el hash de la contraseña usando SHA256 + sal
+        
         public static string GenerarPasswordHash(string password, string salt)
         {
             var combined = password + salt;

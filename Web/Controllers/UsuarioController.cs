@@ -3,7 +3,7 @@ using Services;
 using System;
 using System.Net;
 using System.Web.Mvc;
-using Web.ViewModels; // Asegúrate de que apunte al namespace correcto de tus ViewModels
+using Web.ViewModels; 
 
 namespace Web.Controllers
 {
@@ -31,8 +31,7 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult Crear()
         {
-            // Cargamos la lista de roles desde la DB para llenar el combo desplegable
-            //  ¡AHORA SÍ! Apunta a "NombreRol"
+          
             ViewBag.Roles = new SelectList(usuarioService.ListarRoles(), "RolId", "NombreRol");
             return View();
         }
@@ -43,12 +42,12 @@ namespace Web.Controllers
 
         public ActionResult Crear(UsuarioEditViewModel model)
         {
-            // Ya no validamos model.Password aquí porque no se lo pedimos al administrador
+            
             if (ModelState.IsValid)
             {
                 var salt = PasswordHelper.GenerarSalt();
 
-                // Asignamos la contraseña temporal por defecto
+                
                 var hash = PasswordHelper.GenerarPasswordHash("default123", salt);
 
                 var usuario = new Usuario
@@ -61,19 +60,18 @@ namespace Web.Controllers
                     FechaRegistro = DateTime.Now
                 };
 
-                // 1. Creamos el usuario en la DB y obtenemos su ID
+               
                 int nuevoUsuarioId = usuarioService.CrearUsuario(usuario);
 
-                // 2. Registramos la relación en la tabla intermedia UsuarioRoles
+            
                 usuarioService.AsignarRolAUsuario(nuevoUsuarioId, model.RolId);
 
-                // Alerta informativa para recordar la clave temporal
+              
                 TempData["SuccessMessage"] = "Usuario creado con éxito. La contraseña inicial es: default123";
                 return RedirectToAction("Index");
             }
 
-            // Si algo falla, recargamos el combo de roles para la vista
-            //  ¡AHORA SÍ! Apunta a "NombreRol"
+           
             ViewBag.Roles = new SelectList(usuarioService.ListarRoles(), "RolId", "NombreRol");
             return View(model);
         }

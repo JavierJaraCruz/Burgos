@@ -16,7 +16,7 @@ namespace Web.Services
 
         public Dashboard ObtenerDashboard()
         {
-            // aquí podrías meter lógica adicional si quieres
+           
             return _dashboardDAL.ObtenerMetricas();
         }
 

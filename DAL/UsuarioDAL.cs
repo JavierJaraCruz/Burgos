@@ -172,7 +172,7 @@ namespace DAL
             return usuario;
         }
 
-        // Método para insertar en la tabla intermedia
+      
         public void AsignarRol(int usuarioId, int rolId)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -187,7 +187,7 @@ namespace DAL
             }
         }
 
-        // Método rápido para listar los roles en el formulario (puedes crear un RolDAL propio luego si prefieres)
+       
         public List<Rol> ListarRoles()
         {
             var lista = new List<Rol>();
