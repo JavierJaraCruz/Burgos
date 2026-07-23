@@ -5,21 +5,21 @@
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAASQAP5PeH0Ktrd5U5N1kgQAAAAACAAAAAAAQZgAAAAEAACAAAAA4JRf4/iGFd+eary5thdwuWYV6xzfGwqG7U6PJPpw01QAAAAAOgAAAAAIAACAAAAAwW++B/0e8y+AwQgPTxLxbqpuz4XcOnPHE6s2m76OrGyAAAADPfncxSqa13bQklYGutZ+2QhOQgBa4BF00t9wp+xL30kAAAADpypYXcGFx+Bfe/EWGkt5zRTOpQlZddeLaXRbXkcFWc8D+of3klcBmLiVkB8D2cNTzytqe9PfQvhWO7TFgq5tZ</EncryptedPassword>
     <_PublishTargetUrl>ftp://burgossitio.somee.com/www.burgossitio.somee.com</_PublishTargetUrl>
-    <History>True|2026-06-19T00:09:03.1738693Z||;</History>
+    <History>True|2026-07-18T21:05:04.5713412Z||;True|2026-06-18T19:09:03.1738693-05:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>10/09/2013 16:29:20</publishTime>
+      <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.pdb">
-      <publishTime>10/09/2013 16:29:20</publishTime>
+      <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/DAL.dll">
-      <publishTime>06/18/2026 19:06:28</publishTime>
+      <publishTime>07/18/2026 15:57:31</publishTime>
     </File>
     <File Include="bin/DAL.pdb">
-      <publishTime>06/18/2026 19:06:28</publishTime>
+      <publishTime>07/18/2026 15:57:31</publishTime>
     </File>
     <File Include="bin/Entities.dll">
       <publishTime>06/18/2026 19:06:27</publishTime>
@@ -43,7 +43,7 @@
       <publishTime>05/27/2022 18:36:26</publishTime>
     </File>
     <File Include="bin/es/System.Web.Optimization.resources.dll">
-      <publishTime>11/02/2014 10:28:40</publishTime>
+      <publishTime>02/11/2014 10:28:40</publishTime>
     </File>
     <File Include="bin/es/System.Web.Razor.resources.dll">
       <publishTime>05/27/2022 18:36:58</publishTime>
@@ -58,10 +58,10 @@
       <publishTime>05/27/2022 18:36:26</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
-      <publishTime>05/09/2018 16:10:50</publishTime>
+      <publishTime>09/05/2018 16:10:50</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>11/04/2022 19:09:46</publishTime>
+      <publishTime>04/11/2022 19:09:46</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.Bson.dll">
       <publishTime>11/27/2018 18:10:18</publishTime>
@@ -70,7 +70,7 @@
       <publishTime>11/27/2018 18:07:54</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>08/03/2023 07:09:56</publishTime>
+      <publishTime>03/08/2023 07:09:56</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>08/08/2018 05:38:48</publishTime>
@@ -112,10 +112,10 @@
       <publishTime>08/08/2018 12:09:42</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
-      <publishTime>05/12/2017 09:36:44</publishTime>
+      <publishTime>12/05/2017 09:36:44</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
-      <publishTime>05/12/2017 09:36:44</publishTime>
+      <publishTime>12/05/2017 09:36:44</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Managed.Core.targets">
       <publishTime>08/08/2018 12:09:42</publishTime>
@@ -124,85 +124,85 @@
       <publishTime>08/08/2018 12:09:42</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Win32.Primitives.dll">
-      <publishTime>05/11/2016 18:55:32</publishTime>
+      <publishTime>11/05/2016 18:55:32</publishTime>
     </File>
     <File Include="bin/roslyn/System.AppContext.dll">
-      <publishTime>05/11/2016 18:55:34</publishTime>
+      <publishTime>11/05/2016 18:55:34</publishTime>
     </File>
     <File Include="bin/roslyn/System.Collections.Immutable.dll">
       <publishTime>05/16/2018 03:29:34</publishTime>
     </File>
     <File Include="bin/roslyn/System.Console.dll">
-      <publishTime>05/11/2016 18:55:48</publishTime>
+      <publishTime>11/05/2016 18:55:48</publishTime>
     </File>
     <File Include="bin/roslyn/System.Diagnostics.DiagnosticSource.dll">
-      <publishTime>05/11/2016 18:55:52</publishTime>
+      <publishTime>11/05/2016 18:55:52</publishTime>
     </File>
     <File Include="bin/roslyn/System.Diagnostics.FileVersionInfo.dll">
-      <publishTime>05/11/2016 18:55:56</publishTime>
+      <publishTime>11/05/2016 18:55:56</publishTime>
     </File>
     <File Include="bin/roslyn/System.Diagnostics.StackTrace.dll">
-      <publishTime>05/11/2016 18:55:52</publishTime>
+      <publishTime>11/05/2016 18:55:52</publishTime>
     </File>
     <File Include="bin/roslyn/System.Globalization.Calendars.dll">
-      <publishTime>05/11/2016 18:56:02</publishTime>
+      <publishTime>11/05/2016 18:56:02</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.Compression.dll">
-      <publishTime>05/11/2016 18:56:08</publishTime>
+      <publishTime>11/05/2016 18:56:08</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.Compression.ZipFile.dll">
-      <publishTime>05/11/2016 18:56:04</publishTime>
+      <publishTime>11/05/2016 18:56:04</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.dll">
-      <publishTime>05/11/2016 18:56:08</publishTime>
+      <publishTime>11/05/2016 18:56:08</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.Primitives.dll">
-      <publishTime>05/11/2016 18:56:08</publishTime>
+      <publishTime>11/05/2016 18:56:08</publishTime>
     </File>
     <File Include="bin/roslyn/System.Net.Http.dll">
-      <publishTime>05/11/2016 18:56:30</publishTime>
+      <publishTime>11/05/2016 18:56:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Net.Sockets.dll">
-      <publishTime>05/11/2016 18:56:34</publishTime>
+      <publishTime>11/05/2016 18:56:34</publishTime>
     </File>
     <File Include="bin/roslyn/System.Reflection.Metadata.dll">
       <publishTime>05/16/2018 03:29:44</publishTime>
     </File>
     <File Include="bin/roslyn/System.Runtime.InteropServices.RuntimeInformation.dll">
-      <publishTime>05/11/2016 18:57:00</publishTime>
+      <publishTime>11/05/2016 18:57:00</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Cryptography.Algorithms.dll">
-      <publishTime>05/11/2016 18:57:14</publishTime>
+      <publishTime>11/05/2016 18:57:14</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Cryptography.Encoding.dll">
-      <publishTime>05/11/2016 18:57:08</publishTime>
+      <publishTime>11/05/2016 18:57:08</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Cryptography.Primitives.dll">
-      <publishTime>05/11/2016 18:57:18</publishTime>
+      <publishTime>11/05/2016 18:57:18</publishTime>
     </File>
     <File Include="bin/roslyn/System.Security.Cryptography.X509Certificates.dll">
-      <publishTime>05/11/2016 18:57:18</publishTime>
+      <publishTime>11/05/2016 18:57:18</publishTime>
     </File>
     <File Include="bin/roslyn/System.Text.Encoding.CodePages.dll">
-      <publishTime>05/11/2016 18:57:20</publishTime>
+      <publishTime>11/05/2016 18:57:20</publishTime>
     </File>
     <File Include="bin/roslyn/System.Threading.Tasks.Extensions.dll">
-      <publishTime>05/11/2016 18:57:24</publishTime>
+      <publishTime>11/05/2016 18:57:24</publishTime>
     </File>
     <File Include="bin/roslyn/System.ValueTuple.dll">
-      <publishTime>05/11/2016 18:57:30</publishTime>
+      <publishTime>11/05/2016 18:57:30</publishTime>
     </File>
     <File Include="bin/roslyn/System.Xml.ReaderWriter.dll">
-      <publishTime>05/11/2016 18:57:36</publishTime>
+      <publishTime>11/05/2016 18:57:36</publishTime>
     </File>
     <File Include="bin/roslyn/System.Xml.XmlDocument.dll">
-      <publishTime>05/11/2016 18:57:34</publishTime>
+      <publishTime>11/05/2016 18:57:34</publishTime>
     </File>
     <File Include="bin/roslyn/System.Xml.XPath.dll">
-      <publishTime>05/11/2016 18:57:40</publishTime>
+      <publishTime>11/05/2016 18:57:40</publishTime>
     </File>
     <File Include="bin/roslyn/System.Xml.XPath.XDocument.dll">
-      <publishTime>05/11/2016 18:57:34</publishTime>
+      <publishTime>11/05/2016 18:57:34</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe">
       <publishTime>08/08/2018 05:38:48</publishTime>
@@ -220,16 +220,16 @@
       <publishTime>08/08/2018 12:18:16</publishTime>
     </File>
     <File Include="bin/Services.dll">
-      <publishTime>06/18/2026 19:06:28</publishTime>
+      <publishTime>07/18/2026 15:57:31</publishTime>
     </File>
     <File Include="bin/Services.pdb">
-      <publishTime>06/18/2026 19:06:28</publishTime>
+      <publishTime>07/18/2026 15:57:31</publishTime>
     </File>
     <File Include="bin/System.Buffers.dll">
       <publishTime>02/19/2020 05:05:18</publishTime>
     </File>
     <File Include="bin/System.Memory.dll">
-      <publishTime>07/05/2022 22:31:02</publishTime>
+      <publishTime>05/07/2022 22:31:02</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>10/20/2023 15:33:52</publishTime>
@@ -256,7 +256,7 @@
       <publishTime>05/27/2022 23:42:20</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>11/02/2014 15:26:04</publishTime>
+      <publishTime>02/11/2014 15:26:04</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
       <publishTime>05/27/2022 23:42:06</publishTime>
@@ -271,10 +271,10 @@
       <publishTime>05/27/2022 23:42:50</publishTime>
     </File>
     <File Include="bin/Web.dll">
-      <publishTime>06/18/2026 19:06:28</publishTime>
+      <publishTime>07/18/2026 15:57:31</publishTime>
     </File>
     <File Include="bin/Web.pdb">
-      <publishTime>06/18/2026 19:06:28</publishTime>
+      <publishTime>07/18/2026 15:57:31</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 13:57:34</publishTime>
@@ -376,19 +376,19 @@
       <publishTime>05/05/2026 16:08:50</publishTime>
     </File>
     <File Include="Content/create.css">
-      <publishTime>06/17/2026 14:44:04</publishTime>
+      <publishTime>06/21/2026 20:52:06</publishTime>
     </File>
     <File Include="Content/detalle.css">
-      <publishTime>06/17/2026 14:43:09</publishTime>
+      <publishTime>06/21/2026 20:51:23</publishTime>
     </File>
     <File Include="Content/footer.css">
       <publishTime>06/16/2026 13:00:44</publishTime>
     </File>
     <File Include="Content/Index.css">
-      <publishTime>06/16/2026 13:42:40</publishTime>
+      <publishTime>06/21/2026 20:50:44</publishTime>
     </File>
     <File Include="Content/login.css">
-      <publishTime>06/16/2026 15:13:14</publishTime>
+      <publishTime>06/21/2026 20:50:17</publishTime>
     </File>
     <File Include="Content/navbar.css">
       <publishTime>06/16/2026 13:00:10</publishTime>
@@ -502,7 +502,7 @@
       <publishTime>06/15/2026 20:04:36</publishTime>
     </File>
     <File Include="Views/Login/Index.cshtml">
-      <publishTime>06/16/2026 15:11:20</publishTime>
+      <publishTime>07/18/2026 16:17:12</publishTime>
     </File>
     <File Include="Views/Orden/Crear.cshtml">
       <publishTime>06/16/2026 16:27:44</publishTime>
@@ -544,28 +544,28 @@
       <publishTime>06/16/2026 13:21:04</publishTime>
     </File>
     <File Include="Views/Rol/Index.cshtml">
-      <publishTime>06/16/2026 13:21:34</publishTime>
+      <publishTime>06/21/2026 20:40:17</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>05/05/2026 16:08:49</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>06/16/2026 16:36:58</publishTime>
+      <publishTime>07/18/2026 16:10:37</publishTime>
     </File>
     <File Include="Views/Usuario/Crear.cshtml">
-      <publishTime>06/16/2026 16:27:50</publishTime>
+      <publishTime>06/21/2026 20:40:37</publishTime>
     </File>
     <File Include="Views/Usuario/Delete.cshtml">
-      <publishTime>06/15/2026 15:57:41</publishTime>
+      <publishTime>06/21/2026 20:40:45</publishTime>
     </File>
     <File Include="Views/Usuario/Detalle.cshtml">
-      <publishTime>06/16/2026 15:28:51</publishTime>
+      <publishTime>06/21/2026 20:40:53</publishTime>
     </File>
     <File Include="Views/Usuario/Editar.cshtml">
       <publishTime>06/16/2026 14:16:02</publishTime>
     </File>
     <File Include="Views/Usuario/Index.cshtml">
-      <publishTime>06/16/2026 14:16:12</publishTime>
+      <publishTime>06/21/2026 20:41:06</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>05/05/2026 16:08:49</publishTime>
@@ -574,7 +574,7 @@
       <publishTime>05/05/2026 16:08:49</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/18/2026 16:58:04</publishTime>
+      <publishTime>07/18/2026 16:02:45</publishTime>
     </File>
   </ItemGroup>
 </Project>
